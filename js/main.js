@@ -33,7 +33,7 @@ function setStart() {
         y = 9;
     let startCell = document.getElementById(`(${x}, ${y})`);
     startCell.classList.add("start");
-    startCell.appendChild(startNode);
+    startCell.appendChild(startIcon);
 }
 
 function setEnd() {
@@ -41,7 +41,7 @@ function setEnd() {
         y = 9;
     let endCell = document.getElementById(`(${x}, ${y})`);
     endCell.classList.add("end");
-    endCell.appendChild(endNode);
+    endCell.appendChild(endIcon);
 }
 
 function enableDrawWalls() {
@@ -58,12 +58,18 @@ function enableDrawWalls() {
 }
 
 createDivGrid();
-let startNode = document.getElementsByClassName("starticon")[0];
-let endNode = document.getElementsByClassName("endicon")[0];
+let startIcon = document.getElementsByClassName("starticon")[0];
+let endIcon = document.getElementsByClassName("endicon")[0];
 let cells = document.querySelectorAll(".cell");
 let grid = [];
 
 pullGrid();
 setStart();
 setEnd();
+
+let startNode = document.getElementsByClassName("start")[0]
+let endNode = document.getElementsByClassName("end")[0]
+
+
 enableDrawWalls();
+dijkstra_solve()
