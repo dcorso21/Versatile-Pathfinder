@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(69, 59, 78);
+
+}
+
+.grid{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    border: 1px solid rgba(0, 245, 253, 0.24);
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wall{
+    background-color: #fff;
+}

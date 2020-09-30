@@ -1,0 +1,69 @@
+function createDivGrid() {
+    let divGrid = document.getElementsByClassName("grid")[0];
+    for (let y = 0; y < 19; y++) {
+        let row = document.createElement("div");
+        row.classList.add("row");
+        for (let x = 0; x < 32; x++) {
+            let div = document.createElement("div");
+            div.classList.add("cell");
+            div.id = `(${x}, ${y})`;
+            row.appendChild(div);
+        }
+        divGrid.appendChild(row);
+    }
+}
+
+function pullGrid() {
+    let rows = document.querySelectorAll(".row");
+    for (let i = 0; i < rows.length; i++) {
+        let row = [];
+        for (let j = 0; j < rows[i].childNodes.length; j++) {
+            let cell = rows[i].childNodes[j];
+            if (cell.classList.contains("start")) row.push("start");
+            else if (cell.classList.contains("end")) row.push("end");
+            else if (cell.classList.contains("wall")) row.push("wall");
+            else row.push("blank");
+        }
+        grid.push(row);
+    }
+}
+
+function setStart() {
+    let x = 8,
+        y = 9;
+    let startCell = document.getElementById(`(${x}, ${y})`);
+    startCell.classList.add("start");
+    startCell.appendChild(startNode);
+}
+
+function setEnd() {
+    let x = 32 - 9,
+        y = 9;
+    let endCell = document.getElementById(`(${x}, ${y})`);
+    endCell.classList.add("end");
+    endCell.appendChild(endNode);
+}
+
+function enableDrawWalls() {
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("mousemove", (e) => {
+            let cond1 = e.buttons === 1,
+                cond2 = !e.target.classList.contains("start"),
+                cond3 = !e.target.classList.contains("end");
+            if (cond1 && cond2 && cond3) {
+                e.target.classList.add("wall");
+            }
+        });
+    }
+}
+
+createDivGrid();
+let startNode = document.getElementsByClassName("starticon")[0];
+let endNode = document.getElementsByClassName("endicon")[0];
+let cells = document.querySelectorAll(".cell");
+let grid = [];
+
+pullGrid();
+setStart();
+setEnd();
+enableDrawWalls();
