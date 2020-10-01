@@ -96,7 +96,7 @@ setEnd();
 let startNode = document.getElementsByClassName("start")[0];
 let endNode = document.getElementsByClassName("end")[0];
 let btn = document.getElementsByClassName("btn")[0];
-let algorithm = 'dijkstras';
+let algorithm = 'astar';
 
 enableDrawWalls();
 

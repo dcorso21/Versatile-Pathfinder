@@ -4,7 +4,7 @@ function findPath() {
     console.log("starting");
     NODES_INFO = {};
     node = startNode.id;
-    algoInfo.commonInfo(node, undefined, (start = true));
+    AlgoHub.commonInfo(node, undefined, (start = true));
     let inQueue = [node],
         visited = [];
 
@@ -14,7 +14,9 @@ function findPath() {
             return [visited, createSolution()];
         }
         inQueue = lookForNeighbors(node, visited, inQueue);
-        [node, inQueue] = pickNextNode(inQueue);
+        [node, inQueue] = !inQueue.length
+            ? [undefined, []]
+            : AlgoHub.algoRoute("pickNext", inQueue);
     }
     return [visited, []];
 }
@@ -40,35 +42,13 @@ function lookForNeighbors(node, visited, inQueue) {
 
     validNeighbors = validNeighbors.map((cell) => {
         let formatted = formatID(...cell);
-        algoInfo.commonInfo(formatted, node);
+        AlgoHub.commonInfo(formatted, node);
         return formatted;
     });
 
     return inQueue.concat(validNeighbors);
 }
 
-function pickNextNode(inQueue) {
-    if (!inQueue.length) return [undefined, []];
-    let nextNode;
-    switch (algorithm) {
-        case "dijkstras":
-            nextNode = inQueue.shift(); //simply
-            break;
-        case "astar":
-            if (inQueue.length === 1) {
-                nextNode = inQueue[0];
-                inQueue = [];
-            } else {
-                nextNode = inQueue.reduce((acc, element) => {
-                    if (NODES_INFO[acc].f < NODES_INFO[element].f) return acc;
-                    return element;
-                });
-                inQueue = inQueue.filter((el) => el !== nextNode);
-            }
-            break;
-    }
-    return [nextNode, inQueue];
-}
 
 function createSolution() {
     let node = endNode.id,
@@ -84,36 +64,69 @@ function createSolution() {
 /**
  * Namespace for info needed per each algorithm
  */
-class algoInfo {
+class AlgoHub {
+    /**
+     *
+     * @param {String} action - recordNode || pickNext
+     * @param {Object} argument - object passed to function
+     */
+    static algoRoute(action, argument) {
+        algos = {
+            dijkstras: () => this.dijkstras()[action](argument),
+            astar: () => this.astar()[action](argument),
+        };
+        algos[algorithm]();
+    }
     static commonInfo(nodeID, prevNodeID, start = false) {
         let info = {
             position: parseID(nodeID),
             previousNode: prevNodeID,
+            id: nodeID,
+            start: start,
         };
         info.gridVal = grid[info.position[1]][info.position[0]];
 
-        let algos = {
-            dijkstras: () => this.dijkstras(info, nodeID, start),
-            astar: () => this.astar(info, nodeID, prevNodeID, start),
+        this.algoRoute("recordNode", info);
+    }
+    static dijkstras(info) {
+        return {
+            recordNode: (info) => {
+                NODES_INFO[info.nodeID] = info;
+            },
+            pickNext: (inQueue) => {
+                return [inQueue.shift(), inQueue];
+            },
         };
-        console.log(algos[algorithm]);
-        algos[algorithm]();
     }
-    static dijkstras(info, nodeID, start) {
-        NODES_INFO[nodeID] = info;
-    }
-    static astar(info, nodeID, prevNodeID, start) {
-        let [endX, endY] = parseID(endNode.id);
-
-        info.h =
-            (info.position[0] - endX) ** 2 + (info.position[1] - endY) ** 2;
-        if (start) {
-            info.g = 0;
-            info.f = info.h;
-        } else {
-            info.g = NODES_INFO[prevNodeID].g + 1;
-            info.f = info.h + info.g;
-        }
-        NODES_INFO[nodeID] = info;
+    static astar(info) {
+        return {
+            recordNode: (info) => {
+                let [endX, endY] = parseID(endNode.id);
+                info.h =
+                    (info.position[0] - endX) ** 2 +
+                    (info.position[1] - endY) ** 2;
+                if (start) {
+                    info.g = 0;
+                    info.f = info.h;
+                } else {
+                    info.g = NODES_INFO[info.prevNodeID].g + 1;
+                    info.f = info.h + info.g;
+                }
+                NODES_INFO[info.nodeID] = info;
+            },
+            pickNext: (inQueue) => {
+                if (inQueue.length === 1) {
+                    return [inQueue[0], []];
+                } else {
+                    let nextNode = inQueue.reduce((acc, element) => {
+                        if (NODES_INFO[acc].f < NODES_INFO[element].f)
+                            return acc;
+                        return element;
+                    });
+                    inQueue = inQueue.filter((el) => el !== nextNode);
+                    return [nextNode, inQueue];
+                }
+            },
+        };
     }
 }
