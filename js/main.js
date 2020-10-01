@@ -92,17 +92,28 @@ btn.addEventListener("click", () => {
     refreshCellandWallIDs();
     pullGrid();
     let [visited, path] = dijkstra_solve(grid);
-    console.log("done");
-    for (let i = 0; i < visited.length; i++) {
-        setInterval(() => {
-            let visitedCell = document.getElementById(visited[i]);
-            visitedCell.classList.add("visited");
-        }, i * 15);
+    function drawVisited() {
+        for (let i = 0; i < visited.length; i++) {
+            setInterval(() => {
+                let visitedCell = document.getElementById(visited[i]);
+                visitedCell.classList.add("visited");
+            }, i * 15);
+        }
+        return 5;
     }
-    for (let i = 0; i < path.length; i++) {
-        setInterval(() => {
+    function drawSolution() {
+        // let s = await drawVisited()
+        for (let i = 0; i < path.length; i++) {
             let solutionCell = document.getElementById(path[i]);
-            solutionCell.classList.add("solution");
-        }, i * 15);
+            solutionCell.classList.remove("visited");
+            setInterval(() => {
+                solutionCell.classList.add("solution");
+            }, i * 35);
+        }
     }
+    // drawVisited()
+    
+    await drawVisited()
+    drawSolution()
+    // setTimeout(drawSolution, visited.length * 15);
 });
