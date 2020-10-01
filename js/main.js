@@ -96,14 +96,16 @@ setEnd();
 let startNode = document.getElementsByClassName("start")[0];
 let endNode = document.getElementsByClassName("end")[0];
 let btn = document.getElementsByClassName("btn")[0];
+let algorithm = 'astar';
 
 enableDrawWalls();
 
 btn.addEventListener("click", () => {
     refreshCellandWallIDs();
     pullGrid();
-    // let [visited, path] = dijkstra_solve(grid);
-    let [visited, path] = aStarSolve(grid);
+    let [visited, path] = dijkstra_solve(grid);
+    console.log('visited, path');
+    console.log(visited, path);
     function drawVisited() {
         return new Promise( resolve => {
             for (let i = 0; i <= visited.length; i++) {
@@ -134,6 +136,6 @@ btn.addEventListener("click", () => {
         }
     }
     
-    drawVisited()
+    // drawVisited()
     return
 });
