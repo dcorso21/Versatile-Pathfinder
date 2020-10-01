@@ -1,3 +1,14 @@
+function formatID(nx, ny) {
+    return `(${nx}, ${ny})`;
+}
+
+function parseID(id) {
+    let gap = id.indexOf(" "),
+        x = Number(id.slice(1, gap-1)),
+        y = Number(id.slice(gap+1, id.length-1));
+    return [x, y];
+}
+
 function createDivGrid() {
     let divGrid = document.getElementsByClassName("grid")[0];
     for (let y = 0; y < 19; y++) {
@@ -91,12 +102,12 @@ enableDrawWalls();
 btn.addEventListener("click", () => {
     refreshCellandWallIDs();
     pullGrid();
-    let [visited, path] = dijkstra_solve(grid);
+    // let [visited, path] = dijkstra_solve(grid);
+    let [visited, path] = aStarSolve(grid);
     function drawVisited() {
         return new Promise( resolve => {
             for (let i = 0; i <= visited.length; i++) {
                 if (i === visited.length){
-                    console.log('do');
                     setTimeout(() => {
                         drawSolution();
                       }, (15 * i) +30 );
@@ -117,8 +128,6 @@ btn.addEventListener("click", () => {
         for (let i = 0; i < path.length; i++) {
 
             let solutionCell = document.getElementById(path[i]);
-            // solutionCell.classList.remove("visited");
-            console.log('hello');
             setInterval(() => {
                 solutionCell.className = "cell solution";
             }, i * 35);

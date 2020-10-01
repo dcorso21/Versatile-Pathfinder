@@ -55,14 +55,3 @@ function findNeighbors(nx, ny, visited, linkPrevious, inQueue) {
     }
     return [inQueue, linkPrevious];
 }
-
-function formatID(nx, ny) {
-    return `(${nx}, ${ny})`;
-}
-
-function parseID(id) {
-    let gap = id.indexOf(" "),
-        x = Number(id.slice(1, gap-1)),
-        y = Number(id.slice(gap+1, id.length-1));
-    return [x, y];
-}

@@ -1,17 +1,13 @@
-function one() {
-    return new Promise(resolve => {
-        resolve(5)
-    })
+function one(word) {
+    i ={
+        'r': () => (console.log('hello')),
+        's': () => (console.log('go!'))
+    }
+    i[word]()
 }
 
 
-async function two() {
-    let s = await one()
-    console.log(s);
-}
-
-
-two()
+one('r')
 
 
 
