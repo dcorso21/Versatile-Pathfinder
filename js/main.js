@@ -99,7 +99,7 @@ btn.addEventListener("click", () => {
                     console.log('do');
                     setTimeout(() => {
                         drawSolution();
-                      }, 15 * i);
+                      }, (15 * i) +30 );
                       return;
                 }
                 setInterval(() => {
