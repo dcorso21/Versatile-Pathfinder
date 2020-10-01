@@ -1,29 +1,68 @@
 function dijkstra_solve(grid) {
-    // Get Start
     let inQueue = [startNode.id],
-        visited = [];
+        visited = [],
+        linkPrevious = {},
+        newNeighbors;
 
-    function findNeighbors(cellId){
-        let neighbors = [];
-        
+    while (inQueue.length > 0) {
+        let node = inQueue.shift(),
+            [nx, ny] = parseID(node);
 
+        if (grid[ny][nx] === "end") {
+            visited.push(node);
+            return [visited, shortestPath(node, linkPrevious)];
+        } else if (grid[ny][nx] === "wall") {
+            continue;
+        }
+        visited.push(node);
+        [inQueue, linkPrevious] = findNeighbors(
+            nx,
+            ny,
+            visited,
+            linkPrevious,
+            inQueue
+        );
     }
+    return [visited, []];
+}
 
+function shortestPath(node, linkPrevious) {
+    let path = [endNode.id];
     while (true) {
-        for (let i = 0; i < inQueue.length; i++) {
-            let node = inQueue.shift(),
-                nx = node[1],
-                ny = node[4];
-            if (grid[ny][nx] === "end"){
-                // End of algo
-                return
-            } else if (grid[ny][nx] === "wall") continue;
-            visited.push(node)
-            inQueue.concat(findNeighbors(node))
+        path.unshift(linkPrevious[node]);
+        node = linkPrevious[node];
+        if (node === startNode.id) return path;
+    }
+}
+
+function findNeighbors(nx, ny, visited, linkPrevious, inQueue) {
+    let up = [nx, ny + 1],
+        down = [nx, ny - 1],
+        right = [nx + 1, ny],
+        left = [nx - 1, ny],
+        neighbors = [up, down, right, left];
+    for (let i = 0; i < neighbors.length; i++) {
+        let id = formatID(neighbors[i][0], neighbors[i][1]),
+            cond1 = !visited.includes(id), // None already visited
+            cond2= !inQueue.includes(id), // No duplicates
+            cond3 = cellIDs.includes(id);  // In cell
+            cond4 = !wallIDs.includes(id);  // Not a wall
+
+        if (cond1 && cond2 && cond3) {
+            linkPrevious[id] = formatID(nx, ny);
+            inQueue.push(id);
         }
     }
+    return [inQueue, linkPrevious];
+}
 
-    // First, visit first node
-    // then assess if it is the end
-    // Then add neighbors to be processed
+function formatID(nx, ny) {
+    return `(${nx}, ${ny})`;
+}
+
+function parseID(id) {
+    let gap = id.indexOf(" "),
+        x = Number(id.slice(1, gap-1)),
+        y = Number(id.slice(gap+1, id.length-1));
+    return [x, y];
 }

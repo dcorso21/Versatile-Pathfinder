@@ -14,15 +14,19 @@ function createDivGrid() {
 }
 
 function pullGrid() {
+    grid = [];
     let rows = document.querySelectorAll(".row");
     for (let i = 0; i < rows.length; i++) {
         let row = [];
         for (let j = 0; j < rows[i].childNodes.length; j++) {
             let cell = rows[i].childNodes[j];
-            if (cell.classList.contains("start")) row.push("start");
-            else if (cell.classList.contains("end")) row.push("end");
-            else if (cell.classList.contains("wall")) row.push("wall");
-            else row.push("blank");
+            if (cell.classList.contains("start")) {
+                row.push("start");
+            } else if (cell.classList.contains("end")) {
+                row.push("end");
+            } else if (cell.classList.contains("wall")) {
+                row.push("wall");
+            } else row.push("blank");
         }
         grid.push(row);
     }
@@ -57,19 +61,48 @@ function enableDrawWalls() {
     }
 }
 
+function refreshCellandWallIDs() {
+    for (let i = 0; i < cells.length; i++) {
+        cellIDs.push(cells[i].id);
+        if (cells[i].classList.contains("wall")) {
+            wallIDs.push(cells[i].id);
+        }
+    }
+}
+
 createDivGrid();
 let startIcon = document.getElementsByClassName("starticon")[0];
 let endIcon = document.getElementsByClassName("endicon")[0];
 let cells = document.querySelectorAll(".cell");
+let cellIDs = [];
+let wallIDs = [];
 let grid = [];
 
 pullGrid();
 setStart();
 setEnd();
 
-let startNode = document.getElementsByClassName("start")[0]
-let endNode = document.getElementsByClassName("end")[0]
-
+let startNode = document.getElementsByClassName("start")[0];
+let endNode = document.getElementsByClassName("end")[0];
+let btn = document.getElementsByClassName("btn")[0];
 
 enableDrawWalls();
-dijkstra_solve()
+
+btn.addEventListener("click", () => {
+    refreshCellandWallIDs();
+    pullGrid();
+    let [visited, path] = dijkstra_solve(grid);
+    console.log("done");
+    for (let i = 0; i < visited.length; i++) {
+        setInterval(() => {
+            let visitedCell = document.getElementById(visited[i]);
+            visitedCell.classList.add("visited");
+        }, i * 15);
+    }
+    for (let i = 0; i < path.length; i++) {
+        setInterval(() => {
+            let solutionCell = document.getElementById(path[i]);
+            solutionCell.classList.add("solution");
+        }, i * 15);
+    }
+});

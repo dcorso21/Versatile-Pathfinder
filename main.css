@@ -32,3 +32,25 @@ body, html {
 .wall{
     background-color: #fff;
 }
+
+.visited{
+    background-color: green;
+}
+.solution{
+    background-color: blue;
+}
+
+.btn{
+    color: rgb(48, 48, 48);
+    font-size: 200%;
+    background-color: rgb(240, 197, 197);
+    width: 20%;
+    margin-top: 30px;
+    margin-left: 40%;
+    height: 50px;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
