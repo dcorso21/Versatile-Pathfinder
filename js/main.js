@@ -93,27 +93,38 @@ btn.addEventListener("click", () => {
     pullGrid();
     let [visited, path] = dijkstra_solve(grid);
     function drawVisited() {
-        for (let i = 0; i < visited.length; i++) {
-            setInterval(() => {
-                let visitedCell = document.getElementById(visited[i]);
-                visitedCell.classList.add("visited");
-            }, i * 15);
-        }
-        return 5;
+        return new Promise( resolve => {
+            for (let i = 0; i <= visited.length; i++) {
+                if (i === visited.length){
+                    console.log('do');
+                    setTimeout(() => {
+                        drawSolution();
+                      }, 15 * i);
+                      return;
+                }
+                setInterval(() => {
+                    let visitedCell = document.getElementById(visited[i]);
+                    if (!visitedCell.classList.contains("solution")){
+                        visitedCell.className = "cell visited";
+                    }
+                }, i * 15);
+            }
+            resolve(5);
+        });
     }
     function drawSolution() {
-        // let s = await drawVisited()
+
         for (let i = 0; i < path.length; i++) {
+
             let solutionCell = document.getElementById(path[i]);
-            solutionCell.classList.remove("visited");
+            // solutionCell.classList.remove("visited");
+            console.log('hello');
             setInterval(() => {
-                solutionCell.classList.add("solution");
+                solutionCell.className = "cell solution";
             }, i * 35);
         }
     }
-    // drawVisited()
     
-    await drawVisited()
-    drawSolution()
-    // setTimeout(drawSolution, visited.length * 15);
+    drawVisited()
+    return
 });
