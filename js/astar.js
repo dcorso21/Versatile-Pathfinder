@@ -53,6 +53,7 @@ function pickNextNode(inQueue) {
     switch (algorithm) {
         case "dijkstras":
             nextNode = inQueue.shift(); //simply
+            break;
         case "astar":
             if (inQueue.length === 1) {
                 nextNode = inQueue[0];
@@ -64,6 +65,7 @@ function pickNextNode(inQueue) {
                 });
                 inQueue = inQueue.filter((el) => el !== nextNode);
             }
+            break;
     }
     return [nextNode, inQueue];
 }
@@ -72,10 +74,10 @@ function createSolution() {
     let node = endNode.id,
         solution = [node];
     while (!!node) {
-        solution.unshift(NODES_INFO[node].prevNode);
-        node = NODES_INFO[node].prevNode;
+        solution.unshift(NODES_INFO[node].previousNode);
+        node = NODES_INFO[node].previousNode;
+        if (node == startNode.id) break;
     }
-    console.log(solution);
     return solution;
 }
 
@@ -94,6 +96,7 @@ class algoInfo {
             dijkstras: () => this.dijkstras(info, nodeID, start),
             astar: () => this.astar(info, nodeID, prevNodeID, start),
         };
+        console.log(algos[algorithm]);
         algos[algorithm]();
     }
     static dijkstras(info, nodeID, start) {
