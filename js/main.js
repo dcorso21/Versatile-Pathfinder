@@ -4,8 +4,8 @@ function formatID(nx, ny) {
 
 function parseID(id) {
     let gap = id.indexOf(" "),
-        x = Number(id.slice(1, gap-1)),
-        y = Number(id.slice(gap+1, id.length-1));
+        x = Number(id.slice(1, gap - 1)),
+        y = Number(id.slice(gap + 1, id.length - 1));
     return [x, y];
 }
 
@@ -45,16 +45,18 @@ function pullGrid() {
 
 function setStart() {
     let x = 8,
-        y = 9;
-    let startCell = document.getElementById(`(${x}, ${y})`);
+        y = 9,
+        startIcon = document.getElementsByClassName("starticon")[0],
+        startCell = document.getElementById(`(${x}, ${y})`);
     startCell.classList.add("start");
     startCell.appendChild(startIcon);
 }
 
 function setEnd() {
     let x = 32 - 9,
-        y = 9;
-    let endCell = document.getElementById(`(${x}, ${y})`);
+        y = 9,
+        endIcon = document.getElementsByClassName("endicon")[0],
+        endCell = document.getElementById(`(${x}, ${y})`);
     endCell.classList.add("end");
     endCell.appendChild(endIcon);
 }
@@ -82,8 +84,7 @@ function refreshCellandWallIDs() {
 }
 
 createDivGrid();
-let startIcon = document.getElementsByClassName("starticon")[0];
-let endIcon = document.getElementsByClassName("endicon")[0];
+
 let cells = document.querySelectorAll(".cell");
 let cellIDs = [];
 let wallIDs = [];
@@ -96,28 +97,26 @@ setEnd();
 let startNode = document.getElementsByClassName("start")[0];
 let endNode = document.getElementsByClassName("end")[0];
 let btn = document.getElementsByClassName("btn")[0];
-let algorithm = 'astar';
+let algorithm = "dfSearch";
 
 enableDrawWalls();
 
 btn.addEventListener("click", () => {
     refreshCellandWallIDs();
     pullGrid();
-    let [visited, path] = findPath()
-    // console.log('visited, path');
-    // console.log(visited, path);
+    let [visited, path] = Solver.findPath();
     function drawVisited() {
-        return new Promise( resolve => {
+        return new Promise((resolve) => {
             for (let i = 0; i <= visited.length; i++) {
-                if (i === visited.length){
+                if (i === visited.length) {
                     setTimeout(() => {
                         drawSolution();
-                      }, (15 * i) +30 );
-                      return;
+                    }, 15 * i + 30);
+                    return;
                 }
                 setInterval(() => {
                     let visitedCell = document.getElementById(visited[i]);
-                    if (!visitedCell.classList.contains("solution")){
+                    if (!visitedCell.classList.contains("solution")) {
                         visitedCell.className = "cell visited";
                     }
                 }, i * 15);
@@ -126,16 +125,14 @@ btn.addEventListener("click", () => {
         });
     }
     function drawSolution() {
-
         for (let i = 0; i < path.length; i++) {
-
             let solutionCell = document.getElementById(path[i]);
             setInterval(() => {
                 solutionCell.className = "cell solution";
             }, i * 35);
         }
     }
-    
-    drawVisited()
-    return
+
+    drawVisited();
+    return;
 });
