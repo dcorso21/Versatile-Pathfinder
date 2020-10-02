@@ -1,5 +1,7 @@
 let cells,
     NODES_INFO,
+    startIcon,
+    endIcon,
     startNode,
     endNode,
     cellIDs = [],
@@ -13,6 +15,7 @@ window.onload = () => {
     Render.setEnd();
     UI.enableDrawWalls();
     UI.enableButtons();
+    UI.enableDragStartandEnd();
 };
 
 class Render {
@@ -24,8 +27,15 @@ class Render {
             if (cells[i].classList.contains("wall")) {
                 wallIDs.push(cells[i].id);
             } else {
-                cells[i].classList.remove("solution");
-                cells[i].classList.remove("visited");
+                let forRemoval = [
+                    "solution",
+                    "visited",
+                    "visited-start-end",
+                    "solution-start-end",
+                ];
+                forRemoval.map((e) => {
+                    cells[i].classList.remove(e);
+                });
             }
         }
     }
@@ -44,18 +54,18 @@ class Render {
         }
     }
     static setStart() {
+        startIcon = document.getElementsByClassName("starticon")[0];
         let x = 8,
             y = 9,
-            startIcon = document.getElementsByClassName("starticon")[0],
             startCell = document.getElementById(`(${x}, ${y})`);
         startCell.classList.add("start");
         startCell.appendChild(startIcon);
     }
 
     static setEnd() {
+        endIcon = document.getElementsByClassName("endicon")[0];
         let x = 32 - 9,
             y = 9,
-            endIcon = document.getElementsByClassName("endicon")[0],
             endCell = document.getElementById(`(${x}, ${y})`);
         endCell.classList.add("end");
         endCell.appendChild(endIcon);
@@ -82,9 +92,9 @@ class Render {
                 if (
                     visitedCell.classList.contains("start") ||
                     visitedCell.classList.contains("end")
-                ){
+                ) {
                     visitedCell.classList.add("visited-start-end");
-                } else{
+                } else {
                     visitedCell.classList.add("visited");
                 }
             }, timeBetween * i);
@@ -101,9 +111,9 @@ class Render {
                 if (
                     solutionCell.classList.contains("start") ||
                     solutionCell.classList.contains("end")
-                ){
-                    vClass = "visited-start-end"
-                    sClass = "solution-start-end"
+                ) {
+                    vClass = "visited-start-end";
+                    sClass = "solution-start-end";
                 }
                 if (!solutionCell.classList.contains("wall")) {
                     solutionCell.classList.remove(vClass);
@@ -179,5 +189,39 @@ class UI {
             resetBtn = document.getElementsByClassName("reset")[0];
         startBtn.addEventListener("click", Render.solveAndDraw);
         resetBtn.addEventListener("click", Render.resetWalls);
+    }
+
+    static enableDragStartandEnd() {
+        let draggedIcon;
+        startIcon.ondragstart = (e) => {
+            draggedIcon = e.target;
+        };
+        endIcon.ondragstart = (e) => {
+            draggedIcon = e.target;
+        };
+
+        [...cells].map((cell) => {
+            cell.ondragover = (e) => {
+                e.preventDefault();
+                Fetch.findStartandFinish();
+                let cls, node;
+                switch (draggedIcon.id) {
+                    case "starticon":
+                        cls = "start";
+                        node = startNode;
+                        break;
+                    case "endicon":
+                        cls = "end";
+                        node = endNode;
+                        break;
+                }
+                node.classList.remove(cls);
+                e.target.classList.add(cls);
+            };
+            cell.ondrop = (e) => {
+                e.preventDefault();
+                e.target.appendChild(draggedIcon);
+            };
+        });
     }
 }

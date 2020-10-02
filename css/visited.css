@@ -1,10 +1,9 @@
 .visited {
     /* @keyframes duration | timing-function | delay | 
     iteration-count | direction | fill-mode | play-state | name */
-    /* animation: visitedAnimation 1.5s ease-out 0s 1 alternate forwards running, */
-                          /* pulse 1.4s ease-in-out 1.5s infinite alternate forwards running; */
+    /* animation: visitedAnimation 1.5s ease-out 0s 1 alternate forwards running,
+        pulse 1.4s ease-in-out 1.5s infinite alternate forwards running; */
     animation: visitedAnimation 1.5s ease-out 0s 1 alternate forwards running;
-
 }
 
 @keyframes visitedAnimation {
@@ -48,5 +47,37 @@
     100% {
         /* transform: scale(1); */
         border: 1px solid rgba(255, 255, 255, 0.068);
+    }
+}
+
+.visited-start-end {
+    animation: visited-start-end-Animation 1.5s ease-out 0s 1 alternate forwards
+        running;
+}
+
+@keyframes visited-start-end-Animation {
+    0% {
+        transform: scale(1) rotateZ(180deg);
+
+        border: 1px solid rgb(255, 255, 255);
+        /* background-color: rgb(233, 173, 8); */
+        /* border-radius: 100%; */
+    }
+
+    50% {
+        border: 1px solid rgb(0, 0, 0);
+        background-color: rgb(19, 131, 116);
+    }
+
+    75% {
+        transform: scale(2);
+        background-color: rgb(13, 170, 190);
+        /* border-radius: 20%; */
+    }
+
+    100% {
+        border: 1px solid rgba(255, 255, 255, 0.116);
+        transform: scale(1.5);
+        background-color: rgb(22, 67, 104);
     }
 }
