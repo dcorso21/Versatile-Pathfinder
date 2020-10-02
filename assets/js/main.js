@@ -157,6 +157,10 @@ class Fetch {
         startNode = document.getElementsByClassName("start")[0];
         endNode = document.getElementsByClassName("end")[0];
     }
+    static cellBelow(cell){
+        let [x, y] = Solver.parseID(cell.id);
+        return document.getElementById(Solver.formatID([x, y-1]))
+    }
 }
 
 class UI {
@@ -195,6 +199,13 @@ class UI {
         let draggedIcon;
         startIcon.ondragstart = (e) => {
             draggedIcon = e.target;
+            var img = new Image(); 
+            img.src = "assets/imgs/start-drag.png ";
+            // img.style.transform = "scale(.5)"
+            // img.style.height = "20px"
+            console.log(e);
+            // img.style.width = "20px"
+            // e.dataTransfer.setDragImage(, 0, 10)
         };
         endIcon.ondragstart = (e) => {
             draggedIcon = e.target;
@@ -216,6 +227,7 @@ class UI {
                         break;
                 }
                 node.classList.remove(cls);
+                // console.log("sss ", e.target);
                 e.target.classList.add(cls);
             };
             cell.ondrop = (e) => {
