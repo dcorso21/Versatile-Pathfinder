@@ -1,5 +1,3 @@
-let NODES_INFO = {};
-
 /**
  * Namespace for functions that directly solve the path.
  */
@@ -43,7 +41,7 @@ class Solver {
             neighbors = [up, down, right, left];
 
         let validNeighbors = neighbors.filter((cell) => {
-            let id = formatID(cell[0], cell[1]),
+            let id = this.formatID(cell[0], cell[1]),
                 cond1 = !visited.includes(id), // None already visited
                 cond2 = !inQueue.includes(id), // No duplicates
                 cond3 = cellIDs.includes(id), // In cell
@@ -54,7 +52,7 @@ class Solver {
         });
 
         validNeighbors = validNeighbors.map((cell) => {
-            let formatted = formatID(...cell);
+            let formatted = this.formatID(...cell);
             AlgoHub.commonInfo(formatted, node);
             return formatted;
         });
@@ -74,6 +72,17 @@ class Solver {
             if (node == startNode.id) break;
         }
         return solution;
+    }
+
+    static formatID(nx, ny) {
+        return `(${nx}, ${ny})`;
+    }
+
+    static parseID(id) {
+        let gap = id.indexOf(" "),
+            x = Number(id.slice(1, gap - 1)),
+            y = Number(id.slice(gap + 1, id.length - 1));
+        return [x, y];
     }
 }
 
@@ -104,7 +113,7 @@ class AlgoHub {
      */
     static commonInfo(nodeID, prevNodeID, start = false) {
         let info = {
-            position: parseID(nodeID),
+            position: Solver.parseID(nodeID),
             previousNode: prevNodeID,
             id: nodeID,
             start: start,
@@ -138,7 +147,7 @@ class AlgoHub {
     static astar() {
         return {
             recordNode: (info) => {
-                let [endX, endY] = parseID(endNode.id);
+                let [endX, endY] = Solver.parseID(endNode.id);
                 info.h =
                     Math.abs(info.position[0] - endX) +
                     Math.abs(info.position[1] - endY);
@@ -169,7 +178,7 @@ class AlgoHub {
     static greedy() {
         return {
             recordNode: (info) => {
-                let [endX, endY] = parseID(endNode.id);
+                let [endX, endY] = Solver.parseID(endNode.id);
                 info.h =
                     (info.position[0] - endX) ** 2 +
                     (info.position[1] - endY) ** 2;
