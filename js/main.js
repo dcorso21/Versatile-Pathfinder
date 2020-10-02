@@ -82,6 +82,7 @@ function enableDrawWalls() {
 }
 
 function refreshCellandWallIDs() {
+    wallIDs = []
     for (let i = 0; i < cells.length; i++) {
         cellIDs.push(cells[i].id);
         if (cells[i].classList.contains("wall")) {
@@ -99,6 +100,7 @@ function resetWalls() {
         d.classList.remove("wall")
     })
     refreshCellandWallIDs()
+    pullGrid()
 }
 
 createDivGrid();
@@ -121,7 +123,7 @@ let algorithm = "dijkstras";
 enableDrawWalls();
 
 startBtn.addEventListener("click", solveAndDraw);
-startBtn.addEventListener("click", resetWalls);
+resetBtn.addEventListener("click", resetWalls);
 
 function solveAndDraw() {
     refreshCellandWallIDs();

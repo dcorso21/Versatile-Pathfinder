@@ -14,7 +14,7 @@ class Solver {
         let inQueue = [node],
             visited = [];
         AlgoHub.commonInfo(node, undefined, true);
-    
+
         while (!!node) {
             visited.push(node);
             if (NODES_INFO[node].gridVal === "end") {
@@ -27,9 +27,9 @@ class Solver {
         }
         return [visited, []];
     }
-    
+
     /**
-     * 
+     *
      * @param {String} node - Current Node id
      * @param {Object} visited - List of visited cells
      * @param {Object} inQueue - List of cells to visit
@@ -41,27 +41,27 @@ class Solver {
             right = [nx + 1, ny],
             left = [nx - 1, ny],
             neighbors = [up, down, right, left];
-    
+
         let validNeighbors = neighbors.filter((cell) => {
             let id = formatID(cell[0], cell[1]),
                 cond1 = !visited.includes(id), // None already visited
                 cond2 = !inQueue.includes(id), // No duplicates
                 cond3 = cellIDs.includes(id), // In cell
                 cond4 = !wallIDs.includes(id); // Not a wall
-    
+
             if (cond1 && cond2 && cond3 && cond4) return true;
             return false;
         });
-    
+
         validNeighbors = validNeighbors.map((cell) => {
             let formatted = formatID(...cell);
             AlgoHub.commonInfo(formatted, node);
             return formatted;
         });
-    
+
         return inQueue.concat(validNeighbors);
     }
-    
+
     /**
      * Creates solution `object` by looping back through previous nodes
      */
@@ -93,7 +93,7 @@ class AlgoHub {
             greedy: () => this.greedy()[action](argument),
             dfSearch: () => this.dfSearch()[action](argument),
         };
-        
+
         return algos[algorithm]();
     }
     /**
@@ -140,8 +140,8 @@ class AlgoHub {
             recordNode: (info) => {
                 let [endX, endY] = parseID(endNode.id);
                 info.h =
-                    Math.abs(info.position[0] - endX)  +
-                    Math.abs(info.position[1] - endY) ;
+                    Math.abs(info.position[0] - endX) +
+                    Math.abs(info.position[1] - endY);
                 if (info.start) {
                     info.g = 0;
                     info.f = info.h;
