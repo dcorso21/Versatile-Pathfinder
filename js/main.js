@@ -1,3 +1,20 @@
+let cells,
+    NODES_INFO,
+    startNode,
+    endNode,
+    cellIDs = [],
+    wallIDs = [],
+    grid = [],
+    algorithm = "dijkstras";
+
+window.onload = () => {
+    Render.createDivGrid();
+    Render.setStart();
+    Render.setEnd();
+    UI.enableDrawWalls();
+    UI.enableButtons();
+};
+
 class Render {
     static refreshCellandWallIDs() {
         wallIDs = [];
@@ -61,12 +78,14 @@ class Render {
     static drawVisited(visited, timeBetween, offset) {
         visited.map((e, i) => {
             setTimeout(() => {
-                let visitedCell = document.getElementById(e),
-                    cond1 = !visitedCell.classList.contains("solution"),
-                    cond2 = !visitedCell.classList.contains("wall");
-                if (cond1 && cond2) {
+                let visitedCell = document.getElementById(e);
+                if (
+                    visitedCell.classList.contains("start") ||
+                    visitedCell.classList.contains("end")
+                ){
+                    visitedCell.classList.add("visited-start-end");
+                } else{
                     visitedCell.classList.add("visited");
-                    // drawVisited(e);
                 }
             }, timeBetween * i);
         });
@@ -75,10 +94,20 @@ class Render {
     static drawSolution(path, timeBetween, offset) {
         path.map((e, i) => {
             setTimeout(() => {
-                let solutionCell = document.getElementById(e);
+                let solutionCell = document.getElementById(e),
+                    vClass = "visited",
+                    sClass = "solution";
+
+                if (
+                    solutionCell.classList.contains("start") ||
+                    solutionCell.classList.contains("end")
+                ){
+                    vClass = "visited-start-end"
+                    sClass = "solution-start-end"
+                }
                 if (!solutionCell.classList.contains("wall")) {
-                    solutionCell.classList.remove("visited");
-                    solutionCell.classList.add("solution");
+                    solutionCell.classList.remove(vClass);
+                    solutionCell.classList.add(sClass);
                 }
             }, timeBetween * 3 * i + offset);
         });
@@ -127,15 +156,18 @@ class UI {
             cells[i].addEventListener("mousemove", (e) => {
                 let cond1 = e.buttons === 1,
                     cond2 = !e.target.classList.contains("start"),
-                    cond3 = !e.target.classList.contains("end");
-                if (cond1 && cond2 && cond3) {
+                    cond3 = !e.target.classList.contains("end"),
+                    cond4 = e.target.classList.contains("cell");
+
+                if (cond1 && cond2 && cond3 && cond4) {
                     e.target.className = "cell wall";
                 }
             });
             cells[i].addEventListener("click", (e) => {
                 let cond1 = !e.target.classList.contains("start"),
-                    cond2 = !e.target.classList.contains("end");
-                if (cond1 && cond2) {
+                    cond2 = !e.target.classList.contains("end"),
+                    cond3 = e.target.classList.contains("cell");
+                if (cond1 && cond2 && cond3) {
                     e.target.classList.toggle("wall");
                 }
             });
@@ -149,20 +181,3 @@ class UI {
         resetBtn.addEventListener("click", Render.resetWalls);
     }
 }
-
-let cells,
-    NODES_INFO,
-    startNode,
-    endNode,
-    cellIDs = [],
-    wallIDs = [],
-    grid = [],
-    algorithm = "dijkstras";
-
-window.onload = () => {
-    Render.createDivGrid();
-    Render.setStart();
-    Render.setEnd();
-    UI.enableDrawWalls();
-    UI.enableButtons();
-};

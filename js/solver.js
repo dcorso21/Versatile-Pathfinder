@@ -88,10 +88,13 @@ class Solver {
 
 /**
  * Namespace for info needed per each algorithm
+ * Each static algo listed much return an object with two methods:
+ * - `recordNode` => records all relevent data used by the algo
+ * - `pickNext` => chooses the next node to visit
  */
 class AlgoHub {
     /**
-     *
+     * Polymorphism conditioned upon active algorithm.
      * @param {String} action - recordNode || pickNext
      * @param {Object} argument - object passed to function
      */
