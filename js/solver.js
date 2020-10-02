@@ -25,7 +25,7 @@ class Solver {
                 ? [undefined, []]
                 : AlgoHub.algoRoute("pickNext", inQueue);
         }
-        return [[], []];
+        return [visited, []];
     }
     
     /**

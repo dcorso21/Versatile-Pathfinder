@@ -71,6 +71,13 @@ function enableDrawWalls() {
                 e.target.className = "cell wall";
             }
         });
+        cells[i].addEventListener("click", (e) => {
+            let cond1 = !e.target.classList.contains("start"),
+                cond2 = !e.target.classList.contains("end");
+            if (cond1 && cond2) {
+                e.target.classList.toggle("wall");
+            }
+        });
     }
 }
 
@@ -86,6 +93,14 @@ function refreshCellandWallIDs() {
     }
 }
 
+function resetWalls() {
+    wallIDs.map((e) => {
+        let d = document.getElementById(e)
+        d.classList.remove("wall")
+    })
+    refreshCellandWallIDs()
+}
+
 createDivGrid();
 
 let cells = document.querySelectorAll(".cell");
@@ -99,49 +114,50 @@ setEnd();
 
 let startNode = document.getElementsByClassName("start")[0];
 let endNode = document.getElementsByClassName("end")[0];
-let btn = document.getElementsByClassName("btn")[0];
-let algorithm = "astar";
+let startBtn = document.getElementsByClassName("begin-algo")[0];
+let resetBtn = document.getElementsByClassName("reset")[0];
+let algorithm = "dijkstras";
 
 enableDrawWalls();
 
-btn.addEventListener("click", solveAndDraw);
+startBtn.addEventListener("click", solveAndDraw);
+startBtn.addEventListener("click", resetWalls);
 
 function solveAndDraw() {
     refreshCellandWallIDs();
     pullGrid();
     let visited, path;
     [visited, path] = Solver.findPath();
-    console.log(visited.length);
-    // visited.forEach()
-    visited.map((e, i) => {
-        setTimeout(() => {
-            drawVisited(e);
-        }, 15 * i);
-    });
-    path.map((e, i) => {
-        setTimeout(() => {
-            drawSolution(e);
-        }, 15 * i + visited.length*15);
-    });
-    console.log(path[0]);
-    // drawVisited(visited, path);
-    drawSolution(path);
+    let timeBetween = 15, //ms
+        offset = visited.length * timeBetween;
+
+    drawVisited(visited, timeBetween);
+    drawSolution(path, timeBetween, offset);
     return;
 }
 
-function drawVisited(e) {
-    let visitedCell = document.getElementById(e),
-        cond1 = !visitedCell.classList.contains("solution"),
-        cond2 = !visitedCell.classList.contains("wall");
-    if (cond1 && cond2) {
-        visitedCell.classList.add("visited");
-    }
+function drawVisited(visited, timeBetween, offset) {
+    visited.map((e, i) => {
+        setTimeout(() => {
+            let visitedCell = document.getElementById(e),
+                cond1 = !visitedCell.classList.contains("solution"),
+                cond2 = !visitedCell.classList.contains("wall");
+            if (cond1 && cond2) {
+                visitedCell.classList.add("visited");
+                // drawVisited(e);
+            }
+        }, timeBetween * i);
+    });
 }
-function drawSolution(e) {
-    let solutionCell = document.getElementById(e);
-    console.log(e, solutionCell);
-    if (!solutionCell.classList.contains("wall")) {
-        solutionCell.classList.remove("visited");
-        solutionCell.classList.add("solution");
-    }
+
+function drawSolution(path, timeBetween, offset) {
+    path.map((e, i) => {
+        setTimeout(() => {
+            let solutionCell = document.getElementById(e);
+            if (!solutionCell.classList.contains("wall")) {
+                solutionCell.classList.remove("visited");
+                solutionCell.classList.add("solution");
+            }
+        }, timeBetween * 3 * i + offset);
+    });
 }

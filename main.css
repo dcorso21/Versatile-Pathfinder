@@ -7,13 +7,20 @@ html {
     box-sizing: border-box;
     background-color: rgb(16, 0, 31);
 }
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn {
     color: rgb(48, 48, 48);
     font-size: 200%;
     background-color: rgb(240, 197, 197);
     width: 20%;
     margin-top: 30px;
-    margin-left: 40%;
+    margin-left: 20px;
     height: 50px;
     align-content: center;
     display: flex;
@@ -22,7 +29,7 @@ html {
 }
 
 .grid {
-    height: 100vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,8 +78,6 @@ html {
         border: 1px solid rgba(241, 241, 241, 0);
     }
 }
-
-
 
 .solution {
     animation-name: shortestPath;
