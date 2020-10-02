@@ -68,7 +68,7 @@ function enableDrawWalls() {
                 cond2 = !e.target.classList.contains("start"),
                 cond3 = !e.target.classList.contains("end");
             if (cond1 && cond2 && cond3) {
-                e.target.classList.add("wall");
+                e.target.className = "cell wall";
             }
         });
     }
@@ -79,6 +79,9 @@ function refreshCellandWallIDs() {
         cellIDs.push(cells[i].id);
         if (cells[i].classList.contains("wall")) {
             wallIDs.push(cells[i].id);
+        } else {
+            cells[i].classList.remove("solution");
+            cells[i].classList.remove("visited");
         }
     }
 }
@@ -97,42 +100,48 @@ setEnd();
 let startNode = document.getElementsByClassName("start")[0];
 let endNode = document.getElementsByClassName("end")[0];
 let btn = document.getElementsByClassName("btn")[0];
-let algorithm = "dfSearch";
+let algorithm = "astar";
 
 enableDrawWalls();
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", solveAndDraw);
+
+function solveAndDraw() {
     refreshCellandWallIDs();
     pullGrid();
-    let [visited, path] = Solver.findPath();
-    function drawVisited() {
-        return new Promise((resolve) => {
-            for (let i = 0; i <= visited.length; i++) {
-                if (i === visited.length) {
-                    setTimeout(() => {
-                        drawSolution();
-                    }, 15 * i + 30);
-                    return;
-                }
-                setInterval(() => {
-                    let visitedCell = document.getElementById(visited[i]);
-                    if (!visitedCell.classList.contains("solution")) {
-                        visitedCell.className = "cell visited";
-                    }
-                }, i * 15);
-            }
-            resolve(5);
-        });
-    }
-    function drawSolution() {
-        for (let i = 0; i < path.length; i++) {
-            let solutionCell = document.getElementById(path[i]);
-            setInterval(() => {
-                solutionCell.className = "cell solution";
-            }, i * 35);
-        }
-    }
-
-    drawVisited();
+    let visited, path;
+    [visited, path] = Solver.findPath();
+    console.log(visited.length);
+    // visited.forEach()
+    visited.map((e, i) => {
+        setTimeout(() => {
+            drawVisited(e);
+        }, 15 * i);
+    });
+    path.map((e, i) => {
+        setTimeout(() => {
+            drawSolution(e);
+        }, 15 * i + visited.length*15);
+    });
+    console.log(path[0]);
+    // drawVisited(visited, path);
+    drawSolution(path);
     return;
-});
+}
+
+function drawVisited(e) {
+    let visitedCell = document.getElementById(e),
+        cond1 = !visitedCell.classList.contains("solution"),
+        cond2 = !visitedCell.classList.contains("wall");
+    if (cond1 && cond2) {
+        visitedCell.classList.add("visited");
+    }
+}
+function drawSolution(e) {
+    let solutionCell = document.getElementById(e);
+    console.log(e, solutionCell);
+    if (!solutionCell.classList.contains("wall")) {
+        solutionCell.classList.remove("visited");
+        solutionCell.classList.add("solution");
+    }
+}

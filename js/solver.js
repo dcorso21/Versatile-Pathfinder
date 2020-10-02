@@ -9,6 +9,7 @@ class Solver {
      */
     static findPath() {
         NODES_INFO = {};
+        // console.log(Object.keys(NODES_INFO).length);
         let node = startNode.id;
         let inQueue = [node],
             visited = [];
@@ -24,7 +25,7 @@ class Solver {
                 ? [undefined, []]
                 : AlgoHub.algoRoute("pickNext", inQueue);
         }
-        return [visited, []];
+        return [[], []];
     }
     
     /**
