@@ -7,9 +7,10 @@ let cells,
     cellIDs = [],
     wallIDs = [],
     grid = [],
-    algorithm = "dijkstras";
+    algorithm = "greedy";
 
 window.onload = () => {
+    // console.log(document);
     Render.createDivGrid();
     Render.setStart();
     Render.setEnd();
@@ -40,11 +41,16 @@ class Render {
         }
     }
     static createDivGrid() {
-        let divGrid = document.getElementsByClassName("grid")[0];
-        for (let y = 0; y < 19; y++) {
+        let divGrid = document.getElementsByClassName("grid")[0],
+            squareSize = 31,
+            wHeight = Math.floor(window.innerHeight/squareSize),
+            wWidth = Math.floor(window.innerWidth*2/3/squareSize);
+        
+        
+        for (let y = 0; y < wHeight; y++) {
             let row = document.createElement("div");
             row.classList.add("row");
-            for (let x = 0; x < 32; x++) {
+            for (let x = 0; x < wWidth; x++) {
                 let div = document.createElement("div");
                 div.classList.add("cell");
                 div.id = `(${x}, ${y})`;
@@ -157,9 +163,9 @@ class Fetch {
         startNode = document.getElementsByClassName("start")[0];
         endNode = document.getElementsByClassName("end")[0];
     }
-    static cellBelow(cell){
+    static cellBelow(cell) {
         let [x, y] = Solver.parseID(cell.id);
-        return document.getElementById(Solver.formatID([x, y-1]))
+        return document.getElementById(Solver.formatID([x, y - 1]));
     }
 }
 
@@ -196,20 +202,20 @@ class UI {
     }
 
     static enableDragStartandEnd() {
-        let draggedIcon;
-        startIcon.ondragstart = (e) => {
-            draggedIcon = e.target;
-            var img = new Image(); 
-            img.src = "assets/imgs/start-drag.png ";
-            // img.style.transform = "scale(.5)"
-            // img.style.height = "20px"
-            console.log(e);
-            // img.style.width = "20px"
-            // e.dataTransfer.setDragImage(, 0, 10)
-        };
-        endIcon.ondragstart = (e) => {
-            draggedIcon = e.target;
-        };
+        let draggedIcon,
+            icons = [startIcon, endIcon];
+
+        icons.map((icon) => {
+            icon.ondragstart = (e) => {
+                draggedIcon = e.target;
+                requestAnimationFrame(() => {
+                    draggedIcon.classList.add("hide-while-dragged");
+                });
+            };
+            icon.ondragend = (e) => {
+                e.srcElement.classList.remove("hide-while-dragged");
+            };
+        });
 
         [...cells].map((cell) => {
             cell.ondragover = (e) => {

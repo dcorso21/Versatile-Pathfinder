@@ -6,19 +6,35 @@ html {
     padding: 0;
     box-sizing: border-box;
     background-color: rgb(16, 0, 31);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-nav {
+.lay {
     display: flex;
-    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.menu {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
 }
 
+.head-menu{
+    display: flex;
+}
+
 .btn {
-    color: rgb(48, 48, 48);
-    font-size: 200%;
-    background-color: rgb(240, 197, 197);
-    width: 20%;
+    color: rgb(241, 241, 241);
+    border: 2px solid rgba(0, 245, 253, 0.123);
+    font-size: 120%;
+    background-color: rgba(109, 142, 143, 0);
+    padding: 0 15px 0 15px;
+    /* width: 20%; */
     margin-top: 30px;
     margin-left: 20px;
     height: 50px;
@@ -26,10 +42,24 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 30px;
+    transition: all .3s;
+    cursor: pointer;
 }
 
+.btn:hover{
+    transform: scale(1.05);
+    border: 2px solid rgba(0, 245, 253, 0.24);
+}
+
+.dropdown-algos{
+    position: absolute;
+    display: block;
+}
+
+
 .grid {
-    height: 85vh;
+    /* height: 85vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +71,7 @@ nav {
 }
 
 .cell {
-    border: 1px solid rgba(0, 245, 253, 0.24);
+    border: 1px solid rgba(0, 245, 253, 0.123);
     /* background-color: green; */
     height: 30px;
     width: 30px;
@@ -50,11 +80,28 @@ nav {
     align-items: center;
 }
 
-.start, .end {
+.start,
+.end {
     background-color: rgb(16, 0, 31);
-    transform: scale(1.5);
+    /* transform: scale(1.5); */
+    animation: startOrEnd .5s ease-out 0s 1 alternate forwards running;
     border-radius: 50%;
     z-index: 5;
+}
+
+
+@keyframes startOrEnd {
+    0% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1.7);
+    }
+
+    100% {
+        transform: scale(1.5);
+    }
 }
 
 img {
@@ -68,6 +115,10 @@ img {
 
 .starticon {
     margin-left: 9px;
+}
+
+.hide-while-dragged {
+    transform: translateX(-9999px);
 }
 
 .wall {
@@ -100,4 +151,3 @@ img {
         border: 1px solid rgba(241, 241, 241, 0);
     }
 }
-
