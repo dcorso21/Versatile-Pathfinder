@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css" integrity="sha512-vswe+cgvic/XBoF1OcM/TeJ2FW0OofqAVdCZiEYkd6dwGXthvkSFWOoGGJgS2CW70VK5dQM5Oh+7ne47s74VTg==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    <title>Path Visualizer Pseudo-Code</title>
+  </head>
+  <body>
+    <div class="back btn"> <i class="fas fa-angle-double-left"></i><span>Back</span></div>
+    <div class="github btn"><span>View Code on Github</span><i class="fab fa-github"></i></div>
+    <div class="pseudo-code">
+      <div class="shared">
+        <div class="info">
+          <h1>Shared Code</h1>
+        </div>
+        <div class="container">
+          <pre><code class="language-javascript">// returns list of visited and nodes 
+// and a list of solution steps if possible
+function findPath() {
+    NODES_INFO = {}; // Object to store algo-specific info
+    let node = startNode, 
+        inQueue = [node], // begin at start node
+        visited = []; 
+    AlgoHub.commonInfo(node, undefined, true);
+
+    // While there are still nodes to visit
+    while (!!node) {
+        visited.push(node);
+        // If the visited node is at the destination,
+        // return the solution
+        if (NODES_INFO[node].gridVal === "end") {
+            return [visited, createSolution()];
+        }
+        // add unvisited neighbors of node to queue
+        inQueue = lookForNeighbors(node, visited, inQueue);
+        //choose next node in loop
+        [node, inQueue] = !inQueue.length
+            // if no more nodes to visit, break loop
+            ? [undefined, []]
+            // else, have the selected algorithm
+            // choose the next node from queue
+            : Algorithm.pickNext(inQueue);
+    }
+    // If loop breaks, there is no solution
+    return [visited, []];
+}
+
+// creates list of nodes from the start to the end
+// by tracing back visited nodes
+function createSolution() {
+    // start at end
+    let node = endNode,
+        solution = [node];
+    while (!!node) {
+        node = NODES_INFO[node].previousNode;
+        solution.unshift(node);
+        if (node == startNode) break;
+    }
+    return solution;
+}
+
+function lookForNeighbors(node, visited, inQueue) {
+    let [nx, ny] = NODES_INFO[node].position,
+        // create neighboring positions
+        up = [nx, ny + 1],
+        down = [nx, ny - 1],
+        right = [nx + 1, ny],
+        left = [nx - 1, ny],
+        neighbors = [up, down, right, left];
+
+    let validNeighbors = neighbors.filter((neighbor) => {
+        if (
+            // filter out: 
+            !visited.includes(neighbor) // visited cells
+            && !inQueue.includes(neighbor) // cells already in queue
+            && cellIDs.includes(neighbor), // cells off map (global variable)
+            && !wallIDs.includes(neighbor); // wall cells (global variable)
+
+        ) return true;
+        return false;
+    });
+
+    // Store info specific to selected algorithm on each node in queue
+    validNeighbors.map((neighbor) => {
+        Algorithm.storeInfo(node=neighbor, previousNode=node);
+    });
+
+    return inQueue.concat(validNeighbors);
+}</code></pre>
+        </div>
+      </div>
+      <div class="algo-specific">
+        <div class="info">
+          <h1>Algorithm Specific</h1>
+        </div>
+        <div class="container">
+          <pre class="dijkstras"><code class="language-javascript">function recordNode(node, prevNode, start? = false) {
+    let info = {
+        position: [node.x node.y],
+        previousNode: prevNode,
+        id: node,
+        start: start,
+    };
+    info.gridVal = grid[info.position[1]][info.position[0]];
+
+    NODES_INFO[info.id] = info;
+}
+
+function pickNext(inQueue){
+    let nextNode = inQueue.shift();
+    return [nextNode, inQueue];
+}</code></pre>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+  </body>
+</html>

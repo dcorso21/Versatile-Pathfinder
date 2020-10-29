@@ -1,0 +1,74 @@
+@use '../libs' as *;
+
+.pseudo-code {
+    width: 100vw;
+    height: 100vh;
+
+    @include flex-center;
+
+    & > * {
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-between;
+        align-items: center;
+        // margin: 30px;
+        background-color: #e37676;
+
+        &.algo-specific {
+            background-color: rgb(97, 154, 204);
+        }
+
+        .info {
+            margin: 20px;
+            margin-bottom: 50px;
+            h1 {
+                font-size: 35px;
+            }
+            
+        }
+    }
+
+
+
+
+    .container {
+        height: 80vh;
+        width: 50vw;
+        padding: 20px;
+        box-sizing: border-box;
+        @include flex-center;
+        justify-content: center;
+        align-items: start;
+    }
+    pre {
+        &::-webkit-scrollbar {
+            width: .7em;
+            // margin-top: 30px;
+            // color: transparent;
+            // background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-track {
+            margin: 30px ;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.112);
+            border-radius: 30px;
+            // outline: 1px solid slategrey;
+        }
+
+        &::-webkit-scrollbar-corner{
+            color: transparent;
+        }
+        max-height: 100%;
+        width: 100%;
+        // margin: 20px;
+        border-radius: 30px;
+        overflow-y: scroll;
+    }
+}

@@ -1,0 +1,19 @@
+.container
+    pre.dijkstras
+        code(class="language-javascript"). 
+            function recordNode(node, prevNode, start? = false) {
+                let info = {
+                    position: [node.x node.y],
+                    previousNode: prevNode,
+                    id: node,
+                    start: start,
+                };
+                info.gridVal = grid[info.position[1]][info.position[0]];
+
+                NODES_INFO[info.id] = info;
+            }
+
+            function pickNext(inQueue){
+                let nextNode = inQueue.shift();
+                return [nextNode, inQueue];
+            }
