@@ -1,0 +1,28 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Pathfinder
+    script(src='https://use.fontawesome.com/dc78fe2469.js')
+    link(rel='stylesheet' href='styles/main.css')
+    //- link(rel='stylesheet' href='css/visited.css')
+    //- link(rel='stylesheet' href='css/solution.css')
+
+body
+    img#starticon.starticon(src='imgs/start.png' alt='start-node' draggable='true')
+    img#endicon.endicon(src='imgs/end.png' alt='end-node')
+    .lay
+        .menu
+            .head-menu
+                .btn.begin-algo Start
+                .btn.reset Reset
+                select#colors
+                    option(value='1') Red
+                    option(value='2') Blue
+                    option(value='3') Green
+                    option(value='4') Yellow
+                    option(value='5') Orange
+        .grid
+        //- <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+script(src='js/main.js')
+script(src='js/solver.js')
