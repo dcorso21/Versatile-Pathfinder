@@ -5,8 +5,6 @@ head
     title Pathfinder
     script(src='https://use.fontawesome.com/dc78fe2469.js')
     link(rel='stylesheet' href='styles/main.css')
-    //- link(rel='stylesheet' href='css/visited.css')
-    //- link(rel='stylesheet' href='css/solution.css')
 
 body
     img#starticon.starticon(src='imgs/start.png' alt='start-node' draggable='true')
@@ -14,15 +12,24 @@ body
     .lay
         .menu
             .head-menu
-                .btn.begin-algo Start
-                .btn.reset Reset
-                select#colors
-                    option(value='1') Red
-                    option(value='2') Blue
-                    option(value='3') Green
-                    option(value='4') Yellow
-                    option(value='5') Orange
+                .control-bar
+                    .btn.begin-algo Start
+                    .btn.reset Reset Solution
+                    .btn.clear-walls Clear Walls
+
+            .pick-algo
+                select#algo-select.btn
+                    option(value='dijkstras') Dijkstras
+                    option(value='astar') A *
+                    option(value='dfSearch') Depth First Search
+                    option(value='greedy') Greedy
+            .description 
+                | Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                | Nobis ipsum porro vel, saepe non veniam sequi laboriosam in rem maxime.
+            .pseudo-code
+                | Pseudo-Code
+
         .grid
         //- <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-script(src='js/main.js')
-script(src='js/solver.js')
+    script(src='js/main.js')
+    script(src='js/solver.js')

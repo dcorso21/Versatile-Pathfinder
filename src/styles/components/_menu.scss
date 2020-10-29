@@ -1,37 +1,71 @@
+@use '../libs' as *;
+
 .menu {
-    display: flex;
+    display: grid;
+    // head, algo-pick, description, pseudo-code
+    grid-template-rows: 10% 10% 60% 20%;
     width: 100%;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
 
     .head-menu {
-        display: flex;
-        .btn {
-            color: rgb(241, 241, 241);
-            border: 2px solid rgba(0, 245, 253, 0.123);
-            font-size: 120%;
-            background-color: rgba(109, 142, 143, 0);
-            padding: 0 15px 0 15px;
-            /* width: 20%; */
-            margin-top: 30px;
-            margin-left: 20px;
-            height: 50px;
-            align-content: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        grid-row: 1;
+        @include flex-center;
+        .control-bar {
+            @include flex-center;
+            border: 2px solid white;
             border-radius: 30px;
-            transition: all 0.3s;
-            cursor: pointer;
-            &:hover {
-                transform: scale(1.05);
-                border: 2px solid rgba(0, 245, 253, 0.24);
+            height: 70%;
+            overflow: hidden;
+
+            .btn {
+                padding: 10px;
+                height: 100%;
+                border-left: 1px solid white;
+                border-right: 1px solid white;
+
+                &:hover {
+                    background-color: rgb(199, 82, 82);
+                }
             }
         }
+        // .btn {
+        //     color: rgb(241, 241, 241);
+        //     outline: none;
+        //     border: 2px solid rgba(0, 245, 253, 0.123);
+        //     font-size: 120%;
+        //     background-color: rgba(109, 142, 143, 0);
+        //     padding: 0 15px 0 15px;
+        //     /* width: 20%; */
+        //     margin-top: 30px;
+        //     margin-left: 20px;
+        //     height: 50px;
+        //     align-content: center;
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     border-radius: 30px;
+        //     transition: all 0.3s;
+        //     cursor: pointer;
+        //     &:hover {
+        //         transform: scale(1.05);
+        //         border: 2px solid rgba(0, 245, 253, 0.24);
+        //     }
+        // }
         .dropdown-algos {
             position: absolute;
             display: block;
         }
     }
+
+    .pick-algo {
+        grid-row: 2;
+    }
+    .description {
+        grid-row: 3;
+    }
+
+
 }

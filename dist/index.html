@@ -10,19 +10,28 @@
   <div class="lay">
     <div class="menu">
       <div class="head-menu">
-        <div class="btn begin-algo">Start</div>
-        <div class="btn reset">Reset</div>
-        <select id="colors">
-          <option value="1">Red</option>
-          <option value="2">Blue</option>
-          <option value="3">Green</option>
-          <option value="4">Yellow</option>
-          <option value="5">Orange</option>
+        <div class="control-bar">
+          <div class="btn begin-algo">Start</div>
+          <div class="btn reset">Reset Solution</div>
+          <div class="btn clear-walls">Clear Walls</div>
+        </div>
+      </div>
+      <div class="pick-algo">
+        <select class="btn" id="algo-select">
+          <option value="dijkstras">Dijkstras</option>
+          <option value="astar">A *</option>
+          <option value="dfSearch">Depth First Search</option>
+          <option value="greedy">Greedy</option>
         </select>
       </div>
+      <div class="description">
+         Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Nobis ipsum porro vel, saepe non veniam sequi laboriosam in rem maxime.
+      </div>
+      <div class="pseudo-code">Pseudo-Code</div>
     </div>
     <div class="grid"></div>
   </div>
+  <script src="js/main.js"></script>
+  <script src="js/solver.js"></script>
 </body>
-<script src="js/main.js"></script>
-<script src="js/solver.js"></script>
