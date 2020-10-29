@@ -9,12 +9,21 @@
     <title>Path Visualizer Pseudo-Code</title>
   </head>
   <body>
-    <div class="back btn"> <i class="fas fa-angle-double-left"></i><span>Back</span></div>
-    <div class="github btn"><span>View Code on Github</span><i class="fab fa-github"></i></div>
-    <div class="pseudo-code">
+    <div class="pseudo-code"><a class="back btn" href="index.html"><i class="fas fa-angle-double-left"></i><span>Back</span></a><a class="github btn" href="https://github.com/dcorso21/Versatile-Pathfinder" target="_blank"><span>View on Github</span><i class="fab fa-github"></i></a>
+      <select id="algo-select-code">
+        <option value="dijkstras">Dijkstras</option>
+        <option value="astar">A *</option>
+        <option value="dfSearch">Depth First Search</option>
+        <option value="greedy">Greedy</option>
+      </select>
       <div class="shared">
         <div class="info">
           <h1>Shared Code</h1>
+          <div class="desc">
+            Much of the code used is shared by algorithms. 
+            In fact, there are only two points where the 
+            algorithm makes decisions
+          </div>
         </div>
         <div class="container">
           <pre><code class="language-javascript">// returns list of visited and nodes 
