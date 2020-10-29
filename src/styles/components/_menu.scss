@@ -3,8 +3,10 @@
 .menu {
     display: grid;
     // head, algo-pick, description, pseudo-code
-    grid-template-rows: 10% 10% 60% 20%;
+    grid-template-rows: 10% 10% 40% 40%;
     width: 100%;
+    padding: 20px;
+    overflow-y: scroll;
 
     .head-menu {
         grid-row: 1;
@@ -13,32 +15,67 @@
             @include flex-center;
             border: 2px solid white;
             border-radius: 30px;
+            // padding: 10px 5px;
             height: 70%;
             overflow: hidden;
 
-            .btn {
-                padding: 10px;
+            ul {
+                @include flex-center;
                 height: 100%;
-                border-left: 1px solid white;
-                border-right: 1px solid white;
+                li {
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    padding: 10px;
+                    border-right: 2px solid white;
+                    &:hover {
+                        background-color: rgb(199, 82, 82);
+                    }
+                    i {
+                        color: white;
+                        margin-right: 10px;
+                    }
 
-                &:hover {
-                    background-color: rgb(199, 82, 82);
                 }
             }
-        }
-        .dropdown-algos {
-            position: absolute;
-            display: block;
+
         }
     }
 
     .pick-algo {
         grid-row: 2;
+        // height: 100%;
+        overflow: hidden;
+        padding: 10px;
+
+        fieldset {
+            border: 2px solid white;
+            border-radius: 30px;
+            height: 100%;
+            width: 100%;
+
+            &:hover {
+            }
+
+            #algo-select {
+                cursor: pointer;
+                background-color: transparent;
+                height: 100%;
+                width: 100%;
+                // padding-bottom: 20px;
+                color: white;
+                font-size: 30px;
+                outline: none;
+                border: none;
+                text-align-last: center;
+            }
+        }
     }
     .description {
         grid-row: 3;
+        padding: 20px;
+        line-height: 150%;
     }
-
-
 }

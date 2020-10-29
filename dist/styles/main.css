@@ -78,9 +78,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #10001f;
   color: var(--fg);
+  overflow: hidden;
 }
 
 .lay {
+  overflow: hidden;
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -88,8 +90,10 @@ body {
 
 .menu {
   display: grid;
-  grid-template-rows: 10% 10% 60% 20%;
+  grid-template-rows: 10% 10% 40% 40%;
   width: 100%;
+  padding: 20px;
+  overflow-y: scroll;
 }
 .menu .head-menu {
   grid-row: 1;
@@ -106,24 +110,54 @@ body {
   height: 70%;
   overflow: hidden;
 }
-.menu .head-menu .control-bar .btn {
-  padding: 10px;
+.menu .head-menu .control-bar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
 }
-.menu .head-menu .control-bar .btn:hover {
+.menu .head-menu .control-bar ul li {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 10px;
+  border-right: 2px solid white;
+}
+.menu .head-menu .control-bar ul li:hover {
   background-color: #c75252;
 }
-.menu .head-menu .dropdown-algos {
-  position: absolute;
-  display: block;
+.menu .head-menu .control-bar ul li i {
+  color: white;
+  margin-right: 10px;
 }
 .menu .pick-algo {
   grid-row: 2;
+  overflow: hidden;
+  padding: 10px;
+}
+.menu .pick-algo fieldset {
+  border: 2px solid white;
+  border-radius: 30px;
+  height: 100%;
+  width: 100%;
+}
+.menu .pick-algo fieldset #algo-select {
+  cursor: pointer;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-size: 30px;
+  outline: none;
+  border: none;
+  text-align-last: center;
 }
 .menu .description {
   grid-row: 3;
+  padding: 20px;
+  line-height: 150%;
 }
 
 img {
@@ -190,7 +224,7 @@ img {
   animation: visited-start-end-Animation 1.5s ease-out 0s 1 alternate forwards running;
 }
 .grid .row .wall {
-  /* background-color: #fff; */
+  z-index: 10;
   animation-name: makeWall;
   animation-duration: 0.7s;
   animation-timing-function: ease-out;
