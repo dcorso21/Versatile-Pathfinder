@@ -147,7 +147,7 @@ body {
   height: 100%;
   width: 100%;
 }
-.menu .scrollable .pick-algo fieldset #algo-select {
+.menu .scrollable .pick-algo fieldset .btn {
   cursor: pointer;
   background-color: transparent;
   height: 100%;
@@ -359,28 +359,94 @@ img {
   }
 }
 .pseudo-code {
+  position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.pseudo-code > * {
+.pseudo-code .btn {
+  color: white;
+  font-size: 120%;
+  position: absolute;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 30px;
+  background-color: rgba(50, 50, 50, 0.701);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.pseudo-code .btn.back {
+  top: 0;
+  left: 0;
+  clip-path: circle(20px at 17px);
+}
+.pseudo-code .btn.back:hover {
+  clip-path: circle(100%);
+}
+.pseudo-code .btn.back i {
+  margin-right: 10px;
+}
+.pseudo-code .btn.github {
+  top: 0;
+  right: 0;
+  clip-path: circle(20px at 160px);
+}
+.pseudo-code .btn.github:hover {
+  clip-path: circle(100%);
+}
+.pseudo-code .btn.github i {
+  margin-left: 10px;
+}
+.pseudo-code #algo-select-code {
+  position: absolute;
+  top: 20px;
+  color: white;
+  font-size: 140%;
+  text-align-last: center;
+  height: 40px;
+  width: min-content;
+  padding: 0 15px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  color: black;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+.pseudo-code #algo-select-code:hover {
+  transform: scale(1.1);
+}
+.pseudo-code .shared,
+.pseudo-code .algo-specific {
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e37676;
+  background-color: #df9466;
 }
-.pseudo-code > *.algo-specific {
-  background-color: #619acc;
+.pseudo-code .shared.algo-specific,
+.pseudo-code .algo-specific.algo-specific {
+  background-color: #756496;
 }
-.pseudo-code > * .info {
-  margin: 20px;
-  margin-bottom: 50px;
+.pseudo-code .shared .info,
+.pseudo-code .algo-specific .info {
+  margin: 0 10%;
+  box-sizing: border-box;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 0;
 }
-.pseudo-code > * .info h1 {
+.pseudo-code .shared .info h1,
+.pseudo-code .algo-specific .info h1 {
   font-size: 35px;
+  border-bottom: 2px solid white;
 }
 .pseudo-code .container {
   height: 80vh;
@@ -401,6 +467,7 @@ img {
 }
 .pseudo-code pre::-webkit-scrollbar {
   width: 0.7em;
+  height: 0.7em;
 }
 .pseudo-code pre::-webkit-scrollbar-track {
   margin: 30px;

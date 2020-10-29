@@ -2,28 +2,38 @@
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' integrity='sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==' crossorigin='anonymous')
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-tomorrow.min.css" integrity="sha512-vswe+cgvic/XBoF1OcM/TeJ2FW0OofqAVdCZiEYkd6dwGXthvkSFWOoGGJgS2CW70VK5dQM5Oh+7ne47s74VTg==" crossorigin="anonymous")
         link(rel='stylesheet' href='styles/main.css')
         title Path Visualizer Pseudo-Code
     body
-        .back.btn 
-            i.fas.fa-angle-double-left
-            span Back
-        .github.btn
-            span View Code on Github
-            i.fab.fa-github
         .pseudo-code
+            a.back.btn(href="index.html")
+                i.fas.fa-angle-double-left
+                span Back
+            a.github.btn(href="https://github.com/dcorso21/Versatile-Pathfinder" target="_blank")
+                span View on Github
+                i.fab.fa-github
+            
+            select#algo-select-code
+                option(value='dijkstras') Dijkstras
+                option(value='astar') A *
+                option(value='dfSearch') Depth First Search
+                option(value='greedy') Greedy
             .shared
                 .info
                     h1 Shared Code
+                    .desc.
+                        Much of the code used is shared by algorithms. 
+                        In fact, there are only two points where the 
+                        algorithm makes decisions
                 include ../components/shared_code.pug
-            
+
             .algo-specific
                 .info
                     h1 Algorithm Specific
                 include ../components/algos_code.pug
 
-            
+
         script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js")
