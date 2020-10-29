@@ -91,7 +91,7 @@ body {
 .menu {
   display: grid;
   grid-template-rows: min-content 1fr;
-  width: 100%;
+  width: 60%;
   overflow-y: scroll;
   padding: 0 20px;
 }
@@ -357,4 +357,60 @@ img {
     background-color: #6fff6a;
     border: 1px solid rgba(255, 255, 255, 0);
   }
+}
+.pseudo-code {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pseudo-code > * {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e37676;
+}
+.pseudo-code > *.algo-specific {
+  background-color: #619acc;
+}
+.pseudo-code > * .info {
+  margin: 20px;
+  margin-bottom: 50px;
+}
+.pseudo-code > * .info h1 {
+  font-size: 35px;
+}
+.pseudo-code .container {
+  height: 80vh;
+  width: 50vw;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  align-items: start;
+}
+.pseudo-code pre {
+  max-height: 100%;
+  width: 100%;
+  border-radius: 30px;
+  overflow-y: scroll;
+}
+.pseudo-code pre::-webkit-scrollbar {
+  width: 0.7em;
+}
+.pseudo-code pre::-webkit-scrollbar-track {
+  margin: 30px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+.pseudo-code pre::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.112);
+  border-radius: 30px;
+}
+.pseudo-code pre::-webkit-scrollbar-corner {
+  color: transparent;
 }
