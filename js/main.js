@@ -1,4 +1,6 @@
-let cells,
+let select = (name) => document.querySelector(name),
+    selectAll = (name) => document.querySelectorAll(name),
+    cells,
     NODES_INFO,
     startIcon,
     endIcon,
@@ -7,7 +9,7 @@ let cells,
     cellIDs = [],
     wallIDs = [],
     grid = [],
-    algorithm = "greedy";
+    algorithm = "dijkstras";
 
 window.onload = () => {
     // console.log(document);
@@ -17,6 +19,7 @@ window.onload = () => {
     UI.enableDrawWalls();
     UI.enableButtons();
     UI.enableDragStartandEnd();
+    UI.enableAlgoChoice();
 };
 
 class Render {
@@ -43,10 +46,9 @@ class Render {
     static createDivGrid() {
         let divGrid = document.getElementsByClassName("grid")[0],
             squareSize = 31,
-            wHeight = Math.floor(window.innerHeight/squareSize),
-            wWidth = Math.floor(window.innerWidth*2/3/squareSize);
-        
-        
+            wHeight = Math.floor(window.innerHeight / squareSize),
+            wWidth = Math.floor((window.innerWidth * 2) / 3 / squareSize);
+
         for (let y = 0; y < wHeight; y++) {
             let row = document.createElement("div");
             row.classList.add("row");
@@ -167,6 +169,11 @@ class Fetch {
         let [x, y] = Solver.parseID(cell.id);
         return document.getElementById(Solver.formatID([x, y - 1]));
     }
+    static getAlgo() {
+        let algo = select('#algo-select').value;
+        console.log(algo);
+        algorithm = algo;
+    }
 }
 
 class UI {
@@ -241,5 +248,9 @@ class UI {
                 e.target.appendChild(draggedIcon);
             };
         });
+    }
+    static enableAlgoChoice() {
+        let algoChoice = select('#algo-select')
+        algoChoice.onchange = Fetch.getAlgo;
     }
 }
