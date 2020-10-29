@@ -3,32 +3,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pathfinder</title>
-  <script src="https://use.fontawesome.com/dc78fe2469.js"></script>
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous">
 </head>
 <body><img class="starticon" id="starticon" src="imgs/start.png" alt="start-node" draggable="true"><img class="endicon" id="endicon" src="imgs/end.png" alt="end-node">
   <div class="lay">
     <div class="menu">
       <div class="head-menu">
         <div class="control-bar">
-          <div class="btn begin-algo">Start</div>
-          <div class="btn reset">Reset Solution</div>
-          <div class="btn clear-walls">Clear Walls</div>
+          <ul>
+            <li><i class="fas fa-play"></i>
+              <btn class="begin-algo">Start</btn>
+            </li>
+            <li><i class="fas fa-undo-alt"></i>
+              <btn class="reset">Reset Solution</btn>
+            </li>
+            <li class="clear-walls"><i class="fas fa-cube"></i>
+              <btn>Clear Walls</btn>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="pick-algo">
-        <select class="btn" id="algo-select">
-          <option value="dijkstras">Dijkstras</option>
-          <option value="astar">A *</option>
-          <option value="dfSearch">Depth First Search</option>
-          <option value="greedy">Greedy</option>
-        </select>
+        <fieldset>
+          <legend>Pick Algorithm</legend>
+          <select class="btn" id="algo-select">
+            <option value="dijkstras">Dijkstras</option>
+            <option value="astar">A *</option>
+            <option value="dfSearch">Depth First Search</option>
+            <option value="greedy">Greedy</option>
+          </select>
+        </fieldset>
       </div>
       <div class="description">
          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         Nobis ipsum porro vel, saepe non veniam sequi laboriosam in rem maxime.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus doloremque officia delectus sequi quod facere, ad tempore hic vero mollitia nisi soluta laboriosam! Pariatur doloribus quasi libero explicabo cupiditate omnis minus aut totam minima nobis eos dicta asperiores culpa suscipit exercitationem incidunt modi nam quibusdam repellat eveniet, rerum animi. Nam corrupti, magnam assumenda asperiores totam vero vitae impedit est iste error provident quisquam omnis maxime natus. Debitis nulla ducimus quod assumenda neque! Libero neque pariatur enim assumenda odio sint in doloribus maiores eaque numquam doloremque, quas consequatur, quisquam ut asperiores possimus deleniti. Laudantium mollitia quibusdam ullam esse et placeat eos?
       </div>
-      <div class="pseudo-code">Pseudo-Code</div>
+      <div class="pseudo-code">
+        Pseudo-Code
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda qui animi, hic molestiae officia consectetur omnis aspernatur voluptatem. Porro necessitatibus cupiditate iste, ullam magni doloribus obcaecati, tempora, vero harum laborum optio doloremque dolor nemo non maxime repellat cum. Omnis odit magnam deserunt. Molestias iusto odio, quibusdam, incidunt enim dolorem non praesentium, inventore sequi consectetur labore ad neque natus dolorum molestiae illum perferendis dicta unde officiis doloremque sit quidem? Repellat dolores, illo iusto at maiores saepe voluptas porro quidem quaerat laboriosam nihil, eaque ex aperiam vel assumenda enim voluptate error libero minima, ratione beatae autem ab delectus. Ex minima soluta, reiciendis sapiente rem sit, temporibus, aperiam nemo ullam dicta tempora repudiandae? Optio fugit consequuntur modi nemo, totam iure quia explicabo ab nobis dolorum, repellat, ipsa beatae pariatur sit? Minus, obcaecati commodi? Saepe ullam, laboriosam eveniet eum beatae quaerat iure quo nemo fugiat blanditiis. Modi magni aperiam id eveniet sit, quis pariatur. Maiores fugit animi corporis nostrum, aliquid maxime sunt rem architecto eum ab voluptate delectus cumque, praesentium itaque aut quibusdam accusamus quos illo necessitatibus assumenda. Perspiciatis maiores sunt dolorum quasi ex consectetur dolore, omnis ea tenetur, rem pariatur. Ab mollitia ut fugit voluptatibus illum dolorem est! Fugiat natus corrupti sequi est!
+      </div>
     </div>
     <div class="grid"></div>
   </div>
