@@ -1,0 +1,152 @@
+@charset "utf-8";
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(16, 0, 31);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.lay {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.menu {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.head-menu{
+    display: flex;
+}
+
+.btn {
+    color: rgb(241, 241, 241);
+    border: 2px solid rgba(0, 245, 253, 0.123);
+    font-size: 120%;
+    background-color: rgba(109, 142, 143, 0);
+    padding: 0 15px 0 15px;
+    /* width: 20%; */
+    margin-top: 30px;
+    margin-left: 20px;
+    height: 50px;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale(1.05);
+    border: 2px solid rgba(0, 245, 253, 0.24);
+}
+
+.dropdown-algos{
+    position: absolute;
+    display: block;
+}
+
+
+.grid {
+    /* height: 85vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    border: 1px solid rgba(0, 245, 253, 0.123);
+    /* background-color: green; */
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start,
+.end {
+    background-color: rgb(16, 0, 31);
+    /* transform: scale(1.5); */
+    animation: startOrEnd .5s ease-out 0s 1 alternate forwards running;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+
+@keyframes startOrEnd {
+    0% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1.7);
+    }
+
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+img {
+    height: 30px;
+    width: 30px;
+    fill: white;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
+.starticon {
+    margin-left: 9px;
+}
+
+.hide-while-dragged {
+    transform: translateX(-9999px);
+}
+
+.wall {
+    /* background-color: #fff; */
+    animation-name: makeWall;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+@keyframes makeWall {
+    0% {
+        transform: scale(0.6);
+        background-color: rgb(214, 214, 214);
+        border: 1px solid rgb(0, 0, 0);
+    }
+
+    50% {
+        transform: scale(1.2);
+        background-color: rgb(218, 218, 218);
+        /* border: 1px solid rgba(255, 255, 255, 0); */
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: rgb(222, 225, 226);
+        border: 1px solid rgba(241, 241, 241, 0);
+    }
+}

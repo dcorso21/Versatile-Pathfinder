@@ -1,0 +1,50 @@
+
+.solution {
+    /* @keyframes duration | timing-function | delay | 
+    iteration-count | direction | fill-mode | play-state | name */
+    animation: shortestPath 1.5s ease-out 0s 1 alternate forwards running;
+}
+.solution-start-end {
+    /* @keyframes duration | timing-function | delay | 
+    iteration-count | direction | fill-mode | play-state | name */
+    animation: start-end-shortestPath 1.5s ease-out 0s 1 alternate forwards running;
+}
+
+@keyframes shortestPath {
+    0% {
+        transform: scale(0.6);
+        background-color: rgb(106, 255, 248);
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+
+    50% {
+        transform: scale(1.2);
+        background-color: rgb(106, 255, 218);
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: rgb(111, 255, 106);
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+}
+@keyframes start-end-shortestPath {
+    0% {
+        transform: scale(1);
+        background-color: rgb(106, 255, 248);
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+
+    50% {
+        transform: scale(2);
+        background-color: rgb(106, 255, 218);
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        transform: scale(1.5);
+        background-color: rgb(111, 255, 106);
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+}

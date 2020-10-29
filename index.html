@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathfinder</title>
+  <script src="https://use.fontawesome.com/dc78fe2469.js"></script>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body><img class="starticon" id="starticon" src="imgs/start.png" alt="start-node" draggable="true"><img class="endicon" id="endicon" src="imgs/end.png" alt="end-node">
+  <div class="lay">
+    <div class="menu">
+      <div class="head-menu">
+        <div class="btn begin-algo">Start</div>
+        <div class="btn reset">Reset</div>
+        <select id="colors">
+          <option value="1">Red</option>
+          <option value="2">Blue</option>
+          <option value="3">Green</option>
+          <option value="4">Yellow</option>
+          <option value="5">Orange</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid"></div>
+  </div>
+</body>
+<script src="js/main.js"></script>
+<script src="js/solver.js"></script>
