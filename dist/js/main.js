@@ -1,4 +1,6 @@
-let cells,
+let select = (name) => document.querySelector(name),
+    selectAll = (name) => document.querySelectorAll(name),
+    cells,
     NODES_INFO,
     startIcon,
     endIcon,
@@ -7,7 +9,7 @@ let cells,
     cellIDs = [],
     wallIDs = [],
     grid = [],
-    algorithm = "greedy";
+    algorithm = "dijkstras";
 
 window.onload = () => {
     // console.log(document);
@@ -17,36 +19,42 @@ window.onload = () => {
     UI.enableDrawWalls();
     UI.enableButtons();
     UI.enableDragStartandEnd();
+    UI.enableAlgoChoice();
 };
 
 class Render {
     static refreshCellandWallIDs() {
         wallIDs = [];
-        cells = document.getElementsByClassName("cell");
-        for (let i = 0; i < cells.length; i++) {
-            cellIDs.push(cells[i].id);
-            if (cells[i].classList.contains("wall")) {
+        cells = [...selectAll(".cell")];
+        // console.log(cells);
+        cells.map((c, i) => {
+            cellIDs.push(c.id);
+            if (c.classList.contains("wall")) {
                 wallIDs.push(cells[i].id);
-            } else {
-                let forRemoval = [
-                    "solution",
-                    "visited",
-                    "visited-start-end",
-                    "solution-start-end",
-                ];
-                forRemoval.map((e) => {
-                    cells[i].classList.remove(e);
-                });
             }
-        }
+        })
+    }
+
+    static resetSolvedAndVisited() {
+        [...cells].map((c) => {
+            let forRemoval = [
+                "solution",
+                "visited",
+                "visited-start-end",
+                "solution-start-end",
+            ];
+            forRemoval.map((e) => {
+                c.classList.remove(e);
+            });
+        })
+        Fetch.pullGrid();
     }
     static createDivGrid() {
         let divGrid = document.getElementsByClassName("grid")[0],
             squareSize = 31,
-            wHeight = Math.floor(window.innerHeight/squareSize),
-            wWidth = Math.floor(window.innerWidth*2/3/squareSize);
-        
-        
+            wHeight = Math.floor(window.innerHeight / squareSize),
+            wWidth = Math.floor((window.innerWidth * 2) / 3 / squareSize);
+
         for (let y = 0; y < wHeight; y++) {
             let row = document.createElement("div");
             row.classList.add("row");
@@ -79,6 +87,7 @@ class Render {
 
     static solveAndDraw() {
         Render.refreshCellandWallIDs();
+        Render.resetSolvedAndVisited();
         Fetch.pullGrid();
         Fetch.findStartandFinish();
         let visited, path;
@@ -131,6 +140,7 @@ class Render {
 
     static resetWalls() {
         Render.refreshCellandWallIDs();
+        console.log('here');
         wallIDs.map((e) => {
             let d = document.getElementById(e);
             d.classList.remove("wall");
@@ -167,6 +177,11 @@ class Fetch {
         let [x, y] = Solver.parseID(cell.id);
         return document.getElementById(Solver.formatID([x, y - 1]));
     }
+    static getAlgo() {
+        let algo = select('#algo-select').value;
+        console.log(algo);
+        algorithm = algo;
+    }
 }
 
 class UI {
@@ -196,9 +211,13 @@ class UI {
 
     static enableButtons() {
         let startBtn = document.getElementsByClassName("begin-algo")[0],
-            resetBtn = document.getElementsByClassName("reset")[0];
+            resetBtn = document.getElementsByClassName("reset")[0],
+            clearWalls = select('.clear-walls');
+
+        console.log(clearWalls);
         startBtn.addEventListener("click", Render.solveAndDraw);
-        resetBtn.addEventListener("click", Render.resetWalls);
+        resetBtn.addEventListener("click", Render.resetSolvedAndVisited);
+        clearWalls.addEventListener("click", Render.resetWalls);
     }
 
     static enableDragStartandEnd() {
@@ -241,5 +260,9 @@ class UI {
                 e.target.appendChild(draggedIcon);
             };
         });
+    }
+    static enableAlgoChoice() {
+        let algoChoice = select('#algo-select')
+        algoChoice.onchange = Fetch.getAlgo;
     }
 }

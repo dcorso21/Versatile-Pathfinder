@@ -1,0 +1,17 @@
+{
+    "name": "gmailclone",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "ts-watch": "tsc -w",
+        "sass-watch": "sass --no-source-map --watch src:dist",
+        "pug-watch": "pug -w ./src/pug/final -o ./dist/ -P"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
+}

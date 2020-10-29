@@ -1,0 +1,85 @@
+@use '../libs' as *;
+
+.menu {
+    display: grid;
+    // head, algo-pick, description, pseudo-code
+    grid-template-rows: min-content 1fr;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 0 20px;
+
+    .head-menu {
+        grid-row: 1;
+        padding: 10px;
+        @include flex-center;
+        .control-bar {
+            @include flex-center;
+            border: 2px solid white;
+            border-radius: 30px;
+            // padding: 10px 5px;
+            height: 70%;
+            overflow: hidden;
+
+            ul {
+                @include flex-center;
+                height: 100%;
+                li {
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    padding: 10px;
+                    border-right: 2px solid white;
+                    &:hover {
+                        background-color: rgb(199, 82, 82);
+                    }
+                    i {
+                        color: white;
+                        margin-right: 10px;
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    .scrollable{
+        overflow-y: scroll;
+        grid-row: 2;
+        .pick-algo {
+            // grid-row: 2;
+            // height: 100%;
+            overflow: hidden;
+            padding: 10px;
+    
+            fieldset {
+                border: 2px solid white;
+                border-radius: 30px;
+                height: 100%;
+                width: 100%;
+    
+                &:hover {
+                }
+    
+                #algo-select {
+                    cursor: pointer;
+                    background-color: transparent;
+                    height: 100%;
+                    width: 100%;
+                    // padding-bottom: 20px;
+                    color: white;
+                    font-size: 30px;
+                    outline: none;
+                    border: none;
+                    text-align-last: center;
+                }
+            }
+        }
+        .description {
+            padding: 20px;
+            line-height: 150%;
+        }
+    }
+}
