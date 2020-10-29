@@ -90,13 +90,14 @@ body {
 
 .menu {
   display: grid;
-  grid-template-rows: 10% 10% 40% 40%;
+  grid-template-rows: min-content 1fr;
   width: 100%;
-  padding: 20px;
   overflow-y: scroll;
+  padding: 0 20px;
 }
 .menu .head-menu {
   grid-row: 1;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,18 +133,21 @@ body {
   color: white;
   margin-right: 10px;
 }
-.menu .pick-algo {
+.menu .scrollable {
+  overflow-y: scroll;
   grid-row: 2;
+}
+.menu .scrollable .pick-algo {
   overflow: hidden;
   padding: 10px;
 }
-.menu .pick-algo fieldset {
+.menu .scrollable .pick-algo fieldset {
   border: 2px solid white;
   border-radius: 30px;
   height: 100%;
   width: 100%;
 }
-.menu .pick-algo fieldset #algo-select {
+.menu .scrollable .pick-algo fieldset #algo-select {
   cursor: pointer;
   background-color: transparent;
   height: 100%;
@@ -154,8 +158,7 @@ body {
   border: none;
   text-align-last: center;
 }
-.menu .description {
-  grid-row: 3;
+.menu .scrollable .description {
   padding: 20px;
   line-height: 150%;
 }
