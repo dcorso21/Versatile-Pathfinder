@@ -1,85 +1,99 @@
 @use '../libs' as *;
 
 .menu {
-    display: grid;
-    // head, algo-pick, description, pseudo-code
-    grid-template-rows: min-content 1fr;
-    width: 60%;
-    overflow-y: scroll;
-    padding: 0 20px;
+    position: relative;
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: gc(menu_bg);
 
-    .head-menu {
-        grid-row: 1;
-        padding: 10px;
+    .control-bar {
         @include flex-center;
-        .control-bar {
+        overflow: hidden;
+        margin: 20px;
+
+        div {
             @include flex-center;
-            border: 2px solid white;
-            border-radius: 30px;
-            // padding: 10px 5px;
-            height: 70%;
-            overflow: hidden;
 
-            ul {
-                @include flex-center;
-                height: 100%;
-                li {
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100%;
-                    padding: 10px;
-                    border-right: 2px solid white;
-                    &:hover {
-                        background-color: rgb(199, 82, 82);
-                    }
-                    i {
-                        color: white;
-                        margin-right: 10px;
-                    }
+            cursor: pointer;
+            height: 25px;
+            padding: 10px;
+            border: 1px solid white;
+            transition: all .3s;
 
-                }
+            &:hover {
+                background-color: gc(menu_acc);
             }
 
+            &:last-of-type {
+                border-top-right-radius: $menu_border_radius;
+                border-bottom-right-radius: $menu_border_radius;
+                padding-right: 20px;
+            }
+            &:first-of-type {
+                border-top-left-radius: $menu_border_radius;
+                border-bottom-left-radius: $menu_border_radius;
+                padding-left: 20px;
+            }
+
+            i {
+                color: white;
+                margin-right: 10px;
+            }
         }
     }
 
-    .scrollable{
-        overflow-y: scroll;
-        grid-row: 2;
-        .pick-algo {
-            // grid-row: 2;
-            // height: 100%;
-            overflow: hidden;
-            padding: 10px;
-    
-            fieldset {
-                border: 2px solid white;
-                border-radius: 30px;
+    .pick-algo {
+        // grid-row: 2;
+        // height: 100%;
+        width: 80%;
+        overflow: hidden;
+        padding: 10px;
+        
+        fieldset {
+            border: 2px solid white;
+            border-radius: $menu_border_radius;
+            height: 100%;
+            width: 100%;
+            transition: all .3s;
+            &:hover {
+                background-color: gc(menu_acc);
+            }
+
+
+            .btn {
+                cursor: pointer;
+                background-color: transparent;
                 height: 100%;
                 width: 100%;
-    
-                &:hover {
-                }
-    
-                .btn {
-                    cursor: pointer;
-                    background-color: transparent;
-                    height: 100%;
-                    width: 100%;
-                    // padding-bottom: 20px;
-                    color: white;
-                    font-size: 30px;
-                    outline: none;
-                    border: none;
-                    text-align-last: center;
-                }
+                // padding-bottom: 20px;
+                color: white;
+                font-size: 30px;
+                outline: none;
+                border: none;
+                text-align-last: center;
             }
         }
-        .description {
-            padding: 20px;
-            line-height: 150%;
+    }
+    .description {
+        padding: 20px;
+        line-height: 150%;
+    }
+
+    a {
+        position: absolute;
+        bottom: 20px;
+        text-decoration: none;
+        color: gc(fg);
+        padding: 13px;
+        font-size: 120%;
+        border: 2px solid white;
+        border-radius: $menu_border_radius;
+        transition: all .3s;
+        &:hover {
+            background-color: gc(menu_acc);
         }
 
     }

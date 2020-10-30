@@ -1,8 +1,17 @@
 @use 'sass:map';
+
+$menu_border_radius: 30px;
+
 $color_palette: (
     // Basic
     bg: #1b1b1b,
     fg: #fff,
+
+    menu_bg: rgb(44, 96, 144),
+    cell_bg: rgb(30, 27, 32),
+    cell_border: rgba(67, 72, 75, 0.383),
+
+    menu_acc: rgb(199, 82, 82),
 );
 
 $dark_color_palette: (

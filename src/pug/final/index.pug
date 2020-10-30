@@ -11,37 +11,45 @@ body
     img#endicon.endicon(src='imgs/end.png' alt='end-node')
     .lay
         .menu
-            .head-menu
-                .control-bar
-                    ul
-                        li
-                            i.fas.fa-play
-                            btn.begin-algo Start
-                        li
-                            i.fas.fa-undo-alt
-                            btn.reset Reset Solution
-                        li.clear-walls
-                            i.fas.fa-cube
-                            btn Clear Walls
+            .control-bar
+                .begin-algo
+                    i.fas.fa-play
+                    btn Start
+                .reset
+                    i.fas.fa-undo-alt
+                    btn Reset Solution
+                .clear-walls
+                    i.fas.fa-cube
+                    btn Clear Walls
 
-            .scrollable
-                .pick-algo
-                    fieldset
-                        legend Pick Algorithm
-                        select#algo-select.btn
-                            option(value='dijkstras') Dijkstras
-                            option(value='astar') A *
-                            option(value='dfSearch') Depth First Search
-                            option(value='greedy') Greedy
-                .description 
-                    | Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    | Nobis ipsum porro vel, saepe non veniam sequi laboriosam in rem maxime.
-                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus doloremque officia delectus sequi quod facere, ad tempore hic vero mollitia nisi soluta laboriosam! Pariatur doloribus quasi libero explicabo cupiditate omnis minus aut totam minima nobis eos dicta asperiores culpa suscipit exercitationem incidunt modi nam quibusdam repellat eveniet, rerum animi. Nam corrupti, magnam assumenda asperiores totam vero vitae impedit est iste error provident quisquam omnis maxime natus. Debitis nulla ducimus quod assumenda neque! Libero neque pariatur enim assumenda odio sint in doloribus maiores eaque numquam doloremque, quas consequatur, quisquam ut asperiores possimus deleniti. Laudantium mollitia quibusdam ullam esse et placeat eos?
-                            
+            .pick-algo
+                fieldset
+                    legend Pick Algorithm &nbsp;
+                    select#algo-select.btn
+                        option(value='dijkstras') Dijkstras
+                        option(value='astar') A *
+                        option(value='dfSearch') Depth First Search
+                        option(value='greedy') Greedy
+            .description.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Eaque distinctio nostrum ipsa error natus! Incidunt numquam 
+                aliquam facilis non dolorem saepe eaque vitae reprehenderit 
+                molestias! Minima, quidem perspiciatis voluptatem at suscipit vero! 
+                Adipisci incidunt earum illum quidem ipsum repellat maxime. Autem 
+                libero unde ratione voluptates vel sapiente quis expedita! Amet, 
+                veritatis tempore ipsa in laudantium ullam. Iusto eaque et 
+                dignissimos doloribus obcaecati unde ratione eius nam beatae inventore, 
+                delectus quas quam officia? Aperiam repellat ab hic quod magni dolore 
+                eligendi, id sint quisquam cum est vero aliquam enim sequi rerum dignissimos quo 
+                voluptates deleniti accusamus! Deleniti placeat rerum quas tenetur 
+                suscipit sit dolorum error distinctio facere libero! In labore a 
+                laborum itaque deserunt placeat dignissimos! Officia facilis expedita 
+                animi eius.
+            a(href="pseudoCode.html") 
+                span View Pseudo-Code 
+                i.fas.fa-angle-double-right
 
-                a(href="pseudoCode.html") Click Here
-
-    .grid
+        .grid
     //- <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 

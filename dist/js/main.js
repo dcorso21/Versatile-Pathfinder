@@ -74,6 +74,7 @@ class Render {
             startCell = document.getElementById(`(${x}, ${y})`);
         startCell.classList.add("start");
         startCell.appendChild(startIcon);
+        startIcon.style.display = 'inline';
     }
 
     static setEnd() {
@@ -83,6 +84,7 @@ class Render {
             endCell = document.getElementById(`(${x}, ${y})`);
         endCell.classList.add("end");
         endCell.appendChild(endIcon);
+        endIcon.style.display = 'inline';
     }
 
     static solveAndDraw() {
