@@ -31,21 +31,36 @@
           </select>
         </fieldset>
       </div>
-      <div class="description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-        Eaque distinctio nostrum ipsa error natus! Incidunt numquam 
-        aliquam facilis non dolorem saepe eaque vitae reprehenderit 
-        molestias! Minima, quidem perspiciatis voluptatem at suscipit vero! 
-        Adipisci incidunt earum illum quidem ipsum repellat maxime. Autem 
-        libero unde ratione voluptates vel sapiente quis expedita! Amet, 
-        veritatis tempore ipsa in laudantium ullam. Iusto eaque et 
-        dignissimos doloribus obcaecati unde ratione eius nam beatae inventore, 
-        delectus quas quam officia? Aperiam repellat ab hic quod magni dolore 
-        eligendi, id sint quisquam cum est vero aliquam enim sequi rerum dignissimos quo 
-        voluptates deleniti accusamus! Deleniti placeat rerum quas tenetur 
-        suscipit sit dolorum error distinctio facere libero! In labore a 
-        laborum itaque deserunt placeat dignissimos! Officia facilis expedita 
-        animi eius.
+      <div class="algo-description">
+        <div class="dijkstras algo-desc">
+          Dijkstras is the simplest of the sorting algorithms. It will visit each node
+          in the order in which they are found to be adjacent to the already visited.
+          Dijkstras algorithm is seen as a standard in pathfinding, but can be slow with larger areas to scan.
+          This algorithm does guarantee the shortest path.
+        </div>
+        <div class="astar algo-desc">
+          A* is an algorithm that looks at number of steps taken, 
+          and the euclidean distance from the current cell to the destination. 
+          It creates a value from the sum of these two factors that it 
+          refers to as <em>f</em>. A* Does guarantee the shortest path and is often credited as 
+          the most efficent way to do so.
+        </div>
+        <div class="greedy algo-desc">
+          Greedy is an algorithm that looks at number of steps taken, 
+          and the euclidean distance from the current cell to the destination. 
+          Like A*, it creates a value from the sum of these two factors that it 
+          refers to as <em>f</em>. However the distance is highly prioritized 
+          over the steps taken, causing the algorithm to lurch forward "greedily". 
+          Greedy does NOT guarantee the shortest path.
+        </div>
+        <div class="dfSearch algo-desc">
+          Depth First Search is an algorithm that always chooses a new neighbor 
+          as opposed to those which have waiting in the queue to be visited. It does not 
+          take into account where the end node is and will meander until it stumbles across it.
+          As the visualizer will show, this algorithm, while useful in other applications, 
+          is not optimal for pathfinding and does NOT guarantee the shortest path.
+          
+        </div>
       </div><a href="pseudoCode.html"> <span>View Pseudo-Code </span><i class="fas fa-angle-double-right"></i></a>
     </div>
     <div class="grid"></div>

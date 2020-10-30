@@ -161,9 +161,25 @@ body {
   border: none;
   text-align-last: center;
 }
-.menu .description {
+.menu .algo-description {
   padding: 20px;
   line-height: 150%;
+  background-color: rgba(0, 0, 0, 0.452);
+  border-radius: 30px;
+  width: 70%;
+  margin-top: 20px;
+}
+.menu .algo-description > * {
+  display: none;
+  font-size: 130%;
+  line-height: 150%;
+  color: #b4b4b4;
+}
+.menu .algo-description > *:first-of-type {
+  display: block;
+}
+.menu .algo-description > * em {
+  font-style: italic;
 }
 .menu a {
   position: absolute;

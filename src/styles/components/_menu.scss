@@ -77,9 +77,28 @@
             }
         }
     }
-    .description {
+    .algo-description {
         padding: 20px;
         line-height: 150%;
+        background-color: rgba(0, 0, 0, 0.452);
+        // border: 2px solid gc(fg);
+        border-radius: $menu_border_radius;
+        width: 70%;
+        margin-top: 20px;
+
+        & >* {
+            display: none;
+            font-size: 130%;
+            line-height: 150%;
+            color: rgb(180, 180, 180);
+            &:first-of-type{ 
+                display: block;
+            }
+
+            em {
+                font-style: italic;
+            }
+        }
     }
 
     a {
