@@ -16,10 +16,7 @@ window.onload = () => {
     Render.createDivGrid();
     Render.setStart();
     Render.setEnd();
-    UI.enableDrawWalls();
-    UI.enableButtons();
-    UI.enableDragStartandEnd();
-    UI.enableAlgoChoice();
+    UI.enableAllUI();
 };
 
 class Render {
@@ -32,7 +29,7 @@ class Render {
             if (c.classList.contains("wall")) {
                 wallIDs.push(cells[i].id);
             }
-        })
+        });
     }
 
     static resetSolvedAndVisited() {
@@ -46,7 +43,7 @@ class Render {
             forRemoval.map((e) => {
                 c.classList.remove(e);
             });
-        })
+        });
         Fetch.pullGrid();
     }
     static createDivGrid() {
@@ -74,7 +71,7 @@ class Render {
             startCell = document.getElementById(`(${x}, ${y})`);
         startCell.classList.add("start");
         startCell.appendChild(startIcon);
-        startIcon.style.display = 'inline';
+        startIcon.style.display = "inline";
     }
 
     static setEnd() {
@@ -84,7 +81,7 @@ class Render {
             endCell = document.getElementById(`(${x}, ${y})`);
         endCell.classList.add("end");
         endCell.appendChild(endIcon);
-        endIcon.style.display = 'inline';
+        endIcon.style.display = "inline";
     }
 
     static solveAndDraw() {
@@ -142,7 +139,7 @@ class Render {
 
     static resetWalls() {
         Render.refreshCellandWallIDs();
-        console.log('here');
+        console.log("here");
         wallIDs.map((e) => {
             let d = document.getElementById(e);
             d.classList.remove("wall");
@@ -180,13 +177,19 @@ class Fetch {
         return document.getElementById(Solver.formatID([x, y - 1]));
     }
     static getAlgo() {
-        let algo = select('#algo-select').value;
-        console.log(algo);
+        let algo = select("#algo-select").value;
         algorithm = algo;
     }
 }
 
 class UI {
+    static enableAllUI() {
+        UI.enableDrawWalls();
+        UI.enableButtons();
+        UI.enableDragStartandEnd();
+        UI.enableAlgoChoice();
+    }
+
     static enableDrawWalls() {
         cells = document.querySelectorAll(".cell");
         for (let i = 0; i < cells.length; i++) {
@@ -214,7 +217,7 @@ class UI {
     static enableButtons() {
         let startBtn = document.getElementsByClassName("begin-algo")[0],
             resetBtn = document.getElementsByClassName("reset")[0],
-            clearWalls = select('.clear-walls');
+            clearWalls = select(".clear-walls");
 
         console.log(clearWalls);
         startBtn.addEventListener("click", Render.solveAndDraw);
@@ -228,6 +231,8 @@ class UI {
 
         icons.map((icon) => {
             icon.ondragstart = (e) => {
+                // let img = e.target.cloneNode(true);
+                // e.dataTransfer.setDragImage(img, 25, h * 5);
                 draggedIcon = e.target;
                 requestAnimationFrame(() => {
                     draggedIcon.classList.add("hide-while-dragged");
@@ -263,8 +268,22 @@ class UI {
             };
         });
     }
+
     static enableAlgoChoice() {
-        let algoChoice = select('#algo-select')
-        algoChoice.onchange = Fetch.getAlgo;
+        let algoChoice = select("#algo-select");
+        algoChoice.onchange = () => {
+            Fetch.getAlgo();
+            let descs = selectAll(".algo-desc");
+            console.log(descs);
+            [...descs].map((d) => {
+                d.style.display = "none";
+                d.classList.remove('fade-in')
+                
+                if (d.classList.contains(algorithm)) {
+                    d.style.display = "block";
+                    d.classList.add('fade-in')
+                }
+            });
+        };
     }
 }
