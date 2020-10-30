@@ -358,6 +358,20 @@ img {
     border: 1px solid rgba(255, 255, 255, 0);
   }
 }
+.fade-in {
+  animation: fade-in 0.3s ease-out 0s 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
 .pseudo-code {
   position: relative;
   width: 100vw;
@@ -368,6 +382,7 @@ img {
 }
 .pseudo-code .btn {
   color: white;
+  text-decoration: none;
   font-size: 120%;
   position: absolute;
   margin: 20px;
@@ -400,8 +415,6 @@ img {
   margin-left: 10px;
 }
 .pseudo-code #algo-select-code {
-  position: absolute;
-  top: 20px;
   color: white;
   font-size: 140%;
   text-align-last: center;
@@ -417,7 +430,7 @@ img {
   transition: all 0.3s ease-in-out;
 }
 .pseudo-code #algo-select-code:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
 }
 .pseudo-code .shared,
 .pseudo-code .algo-specific {
@@ -458,6 +471,12 @@ img {
   align-items: center;
   justify-content: center;
   align-items: start;
+}
+.pseudo-code .container pre {
+  display: none;
+}
+.pseudo-code .container pre:nth-of-type(1) {
+  display: block;
 }
 .pseudo-code pre {
   max-height: 100%;

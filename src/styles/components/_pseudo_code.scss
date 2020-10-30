@@ -9,6 +9,7 @@
 
     .btn {
         color: white;
+        text-decoration: none;
         font-size: 120%;
         position: absolute;
         margin: 20px;
@@ -45,8 +46,8 @@
     }
 
     #algo-select-code {
-        position: absolute;
-        top: 20px;
+        // position: absolute;
+        // top: 20px;
         color: white;
         font-size: 140%;
         text-align-last: center;
@@ -62,7 +63,7 @@
         transition: all .3s ease-in-out;
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.03);
         }
     }
 
@@ -104,6 +105,13 @@
         @include flex-center;
         justify-content: center;
         align-items: start;
+        
+        pre {
+            display: none;
+            &:nth-of-type(1) {
+                display: block;
+            }
+        }
     }
     pre {
         &::-webkit-scrollbar {

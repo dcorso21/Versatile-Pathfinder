@@ -10,12 +10,6 @@
   </head>
   <body>
     <div class="pseudo-code"><a class="back btn" href="index.html"><i class="fas fa-angle-double-left"></i><span>Back</span></a><a class="github btn" href="https://github.com/dcorso21/Versatile-Pathfinder" target="_blank"><span>View on Github</span><i class="fab fa-github"></i></a>
-      <select id="algo-select-code">
-        <option value="dijkstras">Dijkstras</option>
-        <option value="astar">A *</option>
-        <option value="dfSearch">Depth First Search</option>
-        <option value="greedy">Greedy</option>
-      </select>
       <div class="shared">
         <div class="info">
           <h1>Shared Code</h1>
@@ -104,9 +98,22 @@ function lookForNeighbors(node, visited, inQueue) {
       <div class="algo-specific">
         <div class="info">
           <h1>Algorithm Specific</h1>
+          <div class="desc"> 
+            <select id="algo-select-code">
+              <option value="dijkstras">Dijkstras</option>
+              <option value="astar">A *</option>
+              <option value="dfSearch">Depth First Search</option>
+              <option value="greedy">Greedy</option>
+            </select>
+          </div>
         </div>
         <div class="container">
-          <pre class="dijkstras"><code class="language-javascript">function recordNode(node, prevNode, start? = false) {
+          <pre class="dijkstras algo-code"><code class="language-javascript">// Dijkstras 
+
+// Record Node simply stores all data about the node 
+// that the algorithm will later use to pick which node comes next
+function recordNode(node, prevNode, start? = false) {
+    //this set of info is stored with every algorithm
     let info = {
         position: [node.x node.y],
         previousNode: prevNode,
@@ -114,17 +121,140 @@ function lookForNeighbors(node, visited, inQueue) {
         start: start,
     };
     info.gridVal = grid[info.position[1]][info.position[0]];
+    // dijkstras is a very simple algorithm and 
+    // does not require any additional properties
+    NODES_INFO[info.id] = info; // stored to global variable
+}
 
+// This function picks the next node
+function pickNext(inQueue){
+    // dijkstras always just picks the next node in queue.
+    // ei: the one that has been waiting the longest
+    let nextNode = inQueue.shift();
+    return [nextNode, inQueue];
+}</code></pre>
+          <pre class="dfSearch algo-code"><code class="language-javascript">// Depth First Search
+
+// Record Node simply stores all data about the node 
+// that the algorithm will later use to pick which node comes next
+function recordNode(node, prevNode, start? = false) {
+    //this set of info is stored with every algorithm
+    let info = {
+        position: [node.x node.y],
+        previousNode: prevNode,
+        id: node,
+        start: start,
+    };
+    info.gridVal = grid[info.position[1]][info.position[0]];
+    // depth first is a very simple algorithm and 
+    // does not require any additional properties
+    NODES_INFO[info.id] = info; // stored to global variable
+}
+
+// This function picks the next node
+function pickNext(inQueue){
+    // depth first always just picks the last node in queue.
+    // ei: the one that has been waiting the shortest
+    let nextNode = inQueue.pop();
+    return [nextNode, inQueue];
+}</code></pre>
+          <pre class="greedy algo-code"><code class="language-javascript">// Greedy
+
+// Record Node simply stores all data about the node 
+// that the algorithm will later use to pick which node comes next
+function recordNode(node, prevNode, start? = false) {
+    // Standard Info
+    let info = {
+        position: [node.x node.y],
+        previousNode: prevNode,
+        id: node,
+        start: start,
+    };
+    info.gridVal = grid[info.position[1]][info.position[0]];
+    // Greedy info
+    // h is dist from end
+    // distances are exaggerated with exponent to prioritize 
+    info.h =
+        (info.position[0] - endNode.X) ** 2 +
+        (info.position[1] - endNode.Y) ** 2;
+    // g is steps taken
+    // f is g+h
+    if (info.start) {
+        info.g = 0;
+        info.f = info.h;
+    } else {
+        info.g = NODES_INFO[info.previousNode].g + 1;
+        info.f = info.h + info.g;
+    }
     NODES_INFO[info.id] = info;
 }
 
-function pickNext(inQueue){
-    let nextNode = inQueue.shift();
-    return [nextNode, inQueue];
+// This function picks the next node
+function pickNext(inQueue) {
+    // if only one node, pick that one
+    if (inQueue.length === 1) {
+        return [inQueue[0], []];
+    } else {
+        //return value with lowest F value
+        let nextNode = inQueue.reduce((acc, element) => {
+            if (NODES_INFO[acc].f < NODES_INFO[element].f)
+                return acc;
+            return element;
+        });
+        inQueue = inQueue.filter((el) => el !== nextNode);
+        return [nextNode, inQueue];
+    }
+}</code></pre>
+          <pre class="astar algo-code"><code class="language-javascript">// A *
+
+// Record Node simply stores all data about the node 
+// that the algorithm will later use to pick which node comes next
+function recordNode(node, prevNode, start? = false) {
+    // Standard Info
+    let info = {
+        position: [node.x node.y],
+        previousNode: prevNode,
+        id: node,
+        start: start,
+    };
+    info.gridVal = grid[info.position[1]][info.position[0]];
+    // A * Info
+    // h is dist from end
+    info.h =
+        Math.abs(info.position[0] - endNode.X) +
+        Math.abs(info.position[1] - endNode.Y);
+    // g is steps taken
+    // f is g+h
+    if (info.start) {
+        info.g = 0;
+        info.f = info.h;
+    } else {
+        info.g = NODES_INFO[info.previousNode].g + 1;
+        info.f = info.h + info.g;
+    }
+    NODES_INFO[info.id] = info;
+}
+
+// This function picks the next node
+function pickNext(inQueue) {
+    // if only one node, pick that one
+    if (inQueue.length === 1) {
+        return [inQueue[0], []];
+    } else {
+        //return value with lowest F value
+        let nextNode = inQueue.reduce((acc, element) => {
+            if (NODES_INFO[acc].f < NODES_INFO[element].f)
+                return acc;
+            return element;
+        });
+        inQueue = inQueue.filter((el) => el !== nextNode);
+        return [nextNode, inQueue];
+    }
 }</code></pre>
         </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="js/pseudo-code.js"></script>
   </body>
 </html>

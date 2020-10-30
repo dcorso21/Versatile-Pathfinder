@@ -15,12 +15,6 @@ html(lang="en")
             a.github.btn(href="https://github.com/dcorso21/Versatile-Pathfinder" target="_blank")
                 span View on Github
                 i.fab.fa-github
-            
-            select#algo-select-code
-                option(value='dijkstras') Dijkstras
-                option(value='astar') A *
-                option(value='dfSearch') Depth First Search
-                option(value='greedy') Greedy
             .shared
                 .info
                     h1 Shared Code
@@ -33,7 +27,14 @@ html(lang="en")
             .algo-specific
                 .info
                     h1 Algorithm Specific
+                    .desc 
+                        select#algo-select-code
+                            option(value='dijkstras') Dijkstras
+                            option(value='astar') A *
+                            option(value='dfSearch') Depth First Search
+                            option(value='greedy') Greedy
                 include ../components/algos_code.pug
 
 
         script(src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js")
+        script(src="js/pseudo-code.js")
