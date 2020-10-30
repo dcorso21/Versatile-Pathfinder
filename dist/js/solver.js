@@ -67,8 +67,8 @@ class Solver {
         let node = endNode.id,
             solution = [node];
         while (!!node) {
-            solution.unshift(NODES_INFO[node].previousNode);
             node = NODES_INFO[node].previousNode;
+            solution.unshift(node);
             if (node == startNode.id) break;
         }
         return solution;

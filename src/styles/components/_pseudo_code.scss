@@ -1,0 +1,146 @@
+@use '../libs' as *;
+
+.pseudo-code {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    @include flex-center;
+
+    .btn {
+        color: white;
+        text-decoration: none;
+        font-size: 120%;
+        position: absolute;
+        margin: 20px;
+        padding: 10px;
+        border-radius: 30px;
+        background-color: rgba(50, 50, 50, 0.701);
+        cursor: pointer;
+        transition: all .3s;
+
+        &.back {
+            top: 0;
+            left: 0;
+            clip-path: circle(20px at 17px);
+            &:hover {
+                clip-path: circle(100%);
+            }
+
+            i {
+                margin-right: 10px;
+            }
+        }
+        &.github {
+            top: 0;
+            right: 0;
+            clip-path: circle(20px at 160px);
+
+            &:hover {
+                clip-path: circle(100%);
+            }
+            i {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    #algo-select-code {
+        // position: absolute;
+        // top: 20px;
+        color: white;
+        font-size: 140%;
+        text-align-last: center;
+        height: 40px;
+        width: min-content;
+        padding: 0 15px;
+        border-radius: 30px;
+        background-color: #ffffff;
+        color: black;
+        outline: none;
+        cursor: pointer;
+        border: none;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.03);
+        }
+    }
+
+    .shared,
+    .algo-specific {
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #df9466;
+
+        &.algo-specific {
+            background-color: rgb(117, 100, 150);
+        }
+
+        .info {
+            margin: 0 10%;
+            box-sizing: border-box;
+            height: 15vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 0;
+            h1 {
+                font-size: 35px;
+                border-bottom: 2px solid white;
+            }
+        }
+    }
+
+    .container {
+        height: 80vh;
+        width: 50vw;
+        padding: 20px;
+        box-sizing: border-box;
+        @include flex-center;
+        justify-content: center;
+        align-items: start;
+        
+        pre {
+            display: none;
+            &:nth-of-type(1) {
+                display: block;
+            }
+        }
+    }
+    pre {
+        &::-webkit-scrollbar {
+            width: 0.7em;
+            height: 0.7em;
+            // margin-top: 30px;
+            // color: transparent;
+            // background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-track {
+            margin: 30px;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.112);
+            border-radius: 30px;
+            // outline: 1px solid slategrey;
+        }
+
+        &::-webkit-scrollbar-corner {
+            color: transparent;
+        }
+        max-height: 100%;
+        width: 100%;
+        // margin: 20px;
+        border-radius: 30px;
+        overflow-y: scroll;
+    }
+}

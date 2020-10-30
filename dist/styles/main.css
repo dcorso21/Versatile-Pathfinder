@@ -91,7 +91,7 @@ body {
 .menu {
   display: grid;
   grid-template-rows: min-content 1fr;
-  width: 100%;
+  width: 60%;
   overflow-y: scroll;
   padding: 0 20px;
 }
@@ -147,7 +147,7 @@ body {
   height: 100%;
   width: 100%;
 }
-.menu .scrollable .pick-algo fieldset #algo-select {
+.menu .scrollable .pick-algo fieldset .btn {
   cursor: pointer;
   background-color: transparent;
   height: 100%;
@@ -357,4 +357,146 @@ img {
     background-color: #6fff6a;
     border: 1px solid rgba(255, 255, 255, 0);
   }
+}
+.fade-in {
+  animation: fade-in 0.3s ease-out 0s 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.pseudo-code {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pseudo-code .btn {
+  color: white;
+  text-decoration: none;
+  font-size: 120%;
+  position: absolute;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 30px;
+  background-color: rgba(50, 50, 50, 0.701);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.pseudo-code .btn.back {
+  top: 0;
+  left: 0;
+  clip-path: circle(20px at 17px);
+}
+.pseudo-code .btn.back:hover {
+  clip-path: circle(100%);
+}
+.pseudo-code .btn.back i {
+  margin-right: 10px;
+}
+.pseudo-code .btn.github {
+  top: 0;
+  right: 0;
+  clip-path: circle(20px at 160px);
+}
+.pseudo-code .btn.github:hover {
+  clip-path: circle(100%);
+}
+.pseudo-code .btn.github i {
+  margin-left: 10px;
+}
+.pseudo-code #algo-select-code {
+  color: white;
+  font-size: 140%;
+  text-align-last: center;
+  height: 40px;
+  width: min-content;
+  padding: 0 15px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  color: black;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+.pseudo-code #algo-select-code:hover {
+  transform: scale(1.03);
+}
+.pseudo-code .shared,
+.pseudo-code .algo-specific {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #df9466;
+}
+.pseudo-code .shared.algo-specific,
+.pseudo-code .algo-specific.algo-specific {
+  background-color: #756496;
+}
+.pseudo-code .shared .info,
+.pseudo-code .algo-specific .info {
+  margin: 0 10%;
+  box-sizing: border-box;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 0;
+}
+.pseudo-code .shared .info h1,
+.pseudo-code .algo-specific .info h1 {
+  font-size: 35px;
+  border-bottom: 2px solid white;
+}
+.pseudo-code .container {
+  height: 80vh;
+  width: 50vw;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  align-items: start;
+}
+.pseudo-code .container pre {
+  display: none;
+}
+.pseudo-code .container pre:nth-of-type(1) {
+  display: block;
+}
+.pseudo-code pre {
+  max-height: 100%;
+  width: 100%;
+  border-radius: 30px;
+  overflow-y: scroll;
+}
+.pseudo-code pre::-webkit-scrollbar {
+  width: 0.7em;
+  height: 0.7em;
+}
+.pseudo-code pre::-webkit-scrollbar-track {
+  margin: 30px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}
+.pseudo-code pre::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.112);
+  border-radius: 30px;
+}
+.pseudo-code pre::-webkit-scrollbar-corner {
+  color: transparent;
 }

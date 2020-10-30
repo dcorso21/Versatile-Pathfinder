@@ -1,0 +1,76 @@
+.container
+    pre
+        code(class="language-javascript"). 
+            // returns list of visited and nodes 
+            // and a list of solution steps if possible
+            function findPath() {
+                NODES_INFO = {}; // Object to store algo-specific info
+                let node = startNode, 
+                    inQueue = [node], // begin at start node
+                    visited = []; 
+                AlgoHub.commonInfo(node, undefined, true);
+
+                // While there are still nodes to visit
+                while (!!node) {
+                    visited.push(node);
+                    // If the visited node is at the destination,
+                    // return the solution
+                    if (NODES_INFO[node].gridVal === "end") {
+                        return [visited, createSolution()];
+                    }
+                    // add unvisited neighbors of node to queue
+                    inQueue = lookForNeighbors(node, visited, inQueue);
+                    //choose next node in loop
+                    [node, inQueue] = !inQueue.length
+                        // if no more nodes to visit, break loop
+                        ? [undefined, []]
+                        // else, have the selected algorithm
+                        // choose the next node from queue
+                        : Algorithm.pickNext(inQueue);
+                }
+                // If loop breaks, there is no solution
+                return [visited, []];
+            }
+
+            // creates list of nodes from the start to the end
+            // by tracing back visited nodes
+            function createSolution() {
+                // start at end
+                let node = endNode,
+                    solution = [node];
+                while (!!node) {
+                    node = NODES_INFO[node].previousNode;
+                    solution.unshift(node);
+                    if (node == startNode) break;
+                }
+                return solution;
+            }
+
+            function lookForNeighbors(node, visited, inQueue) {
+                let [nx, ny] = NODES_INFO[node].position,
+                    // create neighboring positions
+                    up = [nx, ny + 1],
+                    down = [nx, ny - 1],
+                    right = [nx + 1, ny],
+                    left = [nx - 1, ny],
+                    neighbors = [up, down, right, left];
+
+                let validNeighbors = neighbors.filter((neighbor) => {
+                    if (
+                        // filter out: 
+                        !visited.includes(neighbor) // visited cells
+                        && !inQueue.includes(neighbor) // cells already in queue
+                        && cellIDs.includes(neighbor), // cells off map (global variable)
+                        && !wallIDs.includes(neighbor); // wall cells (global variable)
+
+                    ) return true;
+                    return false;
+                });
+
+                // Store info specific to selected algorithm on each node in queue
+                validNeighbors.map((neighbor) => {
+                    Algorithm.storeInfo(node=neighbor, previousNode=node);
+                });
+
+                return inQueue.concat(validNeighbors);
+            }
