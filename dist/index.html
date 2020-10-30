@@ -9,42 +9,62 @@
 <body><img class="starticon" id="starticon" src="imgs/start.png" alt="start-node" draggable="true"><img class="endicon" id="endicon" src="imgs/end.png" alt="end-node">
   <div class="lay">
     <div class="menu">
-      <div class="head-menu">
-        <div class="control-bar">
-          <ul>
-            <li><i class="fas fa-play"></i>
-              <btn class="begin-algo">Start</btn>
-            </li>
-            <li><i class="fas fa-undo-alt"></i>
-              <btn class="reset">Reset Solution</btn>
-            </li>
-            <li class="clear-walls"><i class="fas fa-cube"></i>
-              <btn>Clear Walls</btn>
-            </li>
-          </ul>
+      <div class="control-bar">
+        <div class="begin-algo"><i class="fas fa-play"></i>
+          <btn>Start</btn>
+        </div>
+        <div class="reset"><i class="fas fa-undo-alt"></i>
+          <btn>Reset Solution</btn>
+        </div>
+        <div class="clear-walls"><i class="fas fa-cube"></i>
+          <btn>Clear Walls</btn>
         </div>
       </div>
-      <div class="scrollable">
-        <div class="pick-algo">
-          <fieldset>
-            <legend>Pick Algorithm</legend>
-            <select class="btn" id="algo-select">
-              <option value="dijkstras">Dijkstras</option>
-              <option value="astar">A *</option>
-              <option value="dfSearch">Depth First Search</option>
-              <option value="greedy">Greedy</option>
-            </select>
-          </fieldset>
-        </div>
-        <div class="description">
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-          Nobis ipsum porro vel, saepe non veniam sequi laboriosam in rem maxime.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus doloremque officia delectus sequi quod facere, ad tempore hic vero mollitia nisi soluta laboriosam! Pariatur doloribus quasi libero explicabo cupiditate omnis minus aut totam minima nobis eos dicta asperiores culpa suscipit exercitationem incidunt modi nam quibusdam repellat eveniet, rerum animi. Nam corrupti, magnam assumenda asperiores totam vero vitae impedit est iste error provident quisquam omnis maxime natus. Debitis nulla ducimus quod assumenda neque! Libero neque pariatur enim assumenda odio sint in doloribus maiores eaque numquam doloremque, quas consequatur, quisquam ut asperiores possimus deleniti. Laudantium mollitia quibusdam ullam esse et placeat eos?
-        </div><a href="pseudoCode.html">Click Here</a>
+      <div class="pick-algo">
+        <fieldset>
+          <legend>Pick Algorithm &nbsp;</legend>
+          <select class="btn" id="algo-select">
+            <option value="dijkstras">Dijkstras</option>
+            <option value="astar">A *</option>
+            <option value="dfSearch">Depth First Search</option>
+            <option value="greedy">Greedy</option>
+          </select>
+        </fieldset>
       </div>
+      <div class="algo-description">
+        <div class="dijkstras algo-desc">
+          Dijkstras is the simplest of the sorting algorithms. It will visit each node
+          in the order in which they are found to be adjacent to the already visited.
+          Dijkstras algorithm is seen as a standard in pathfinding, but can be slow with larger areas to scan.
+          This algorithm does guarantee the shortest path.
+        </div>
+        <div class="astar algo-desc">
+          A* is an algorithm that looks at number of steps taken, 
+          and the euclidean distance from the current cell to the destination. 
+          It creates a value from the sum of these two factors that it 
+          refers to as <em>f</em>. A* Does guarantee the shortest path and is often credited as 
+          the most efficent way to do so.
+        </div>
+        <div class="greedy algo-desc">
+          Greedy is an algorithm that looks at number of steps taken, 
+          and the euclidean distance from the current cell to the destination. 
+          Like A*, it creates a value from the sum of these two factors that it 
+          refers to as <em>f</em>. However the distance is highly prioritized 
+          over the steps taken, causing the algorithm to lurch forward "greedily". 
+          Greedy does NOT guarantee the shortest path.
+        </div>
+        <div class="dfSearch algo-desc">
+          Depth First Search is an algorithm that always chooses a new neighbor 
+          as opposed to those which have waiting in the queue to be visited. It does not 
+          take into account where the end node is and will meander until it stumbles across it.
+          As the visualizer will show, this algorithm, while useful in other applications, 
+          is not optimal for pathfinding and does NOT guarantee the shortest path.
+          
+        </div>
+      </div><a href="pseudoCode.html"> <span>View Pseudo-Code </span><i class="fas fa-angle-double-right"></i></a>
     </div>
+    <div class="grid"></div>
   </div>
-  <div class="grid"></div>
   <script src="js/main.js"></script>
   <script src="js/solver.js"></script>
 </body>
